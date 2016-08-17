@@ -4,7 +4,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -52,32 +51,11 @@
                                         </constraints>
                                         <state key="normal" backgroundImage="home_ic_menu"/>
                                     </button>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Znp-zU-nX1">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Znp-zU-nX1" customClass="Segmentio" customModule="Segmentio">
                                         <rect key="frame" x="0.0" y="76" width="600" height="64"/>
-                                        <subviews>
-                                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Al7-E8-qTo">
-                                                <rect key="frame" x="0.0" y="0.0" width="143" height="65"/>
-                                                <subviews>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YsT-mr-e2W">
-                                                        <rect key="frame" x="56" y="0.0" width="30" height="31"/>
-                                                    </imageView>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sHK-Y7-6PL">
-                                                        <rect key="frame" x="50" y="36" width="42" height="21"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                </subviews>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                            </view>
-                                        </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstItem="Al7-E8-qTo" firstAttribute="width" secondItem="Znp-zU-nX1" secondAttribute="width" multiplier="0.25" id="Btz-cD-AP3"/>
-                                            <constraint firstItem="Al7-E8-qTo" firstAttribute="leading" secondItem="Znp-zU-nX1" secondAttribute="leading" id="KsH-oa-UlF"/>
                                             <constraint firstAttribute="height" constant="64" id="bTW-3g-KOf"/>
-                                            <constraint firstAttribute="bottom" secondItem="Al7-E8-qTo" secondAttribute="bottom" id="t4Q-Db-ld9"/>
-                                            <constraint firstItem="Al7-E8-qTo" firstAttribute="top" secondItem="Znp-zU-nX1" secondAttribute="top" id="vgQ-DM-DZF"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -107,6 +85,9 @@
                             <constraint firstItem="yUQ-JE-UYx" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="DcV-gN-SF5"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="segmentioView" destination="Znp-zU-nX1" id="4fg-mX-3l1"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
