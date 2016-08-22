@@ -68,7 +68,7 @@ class RegisterTableViewController: UITableViewController,UIImagePickerController
     }
    
     func configureView() {
-        self.tableView.backgroundView = UIImageView(image: UIImage(named: "LOGIN-BG"))
+//        self.tableView.backgroundView = UIImageView(image: UIImage(named: "LOGIN-BG"))
         Utils.makeCircleFromRetacgleView(avatarView, radius: 3)
         Utils.makeCircleFromRetacgleView(nameView, radius: 3)
         Utils.makeCircleFromRetacgleView(lastnameView, radius: 3)
@@ -176,7 +176,7 @@ class RegisterTableViewController: UITableViewController,UIImagePickerController
     }
 
     @IBAction func onBackLogin(sender: AnyObject) {
-        self.navigationController?.popViewControllerAnimated(true)
+        self.navigationController?.popToRootViewControllerAnimated(true)
         
     }
     @IBAction func onTerms(sender: AnyObject) {
@@ -270,29 +270,31 @@ class RegisterTableViewController: UITableViewController,UIImagePickerController
         request.addParameterWithKey("blasteem_data_di_nascita", value: ageField.text!)
         
         var imageData:NSData?
-        if avatarImageView.image != nil {
-            imageData = UIImageJPEGRepresentation(avatarImageView.image!, 0.5)
-            request.addParameterWithKey("user_image", value:"data:image/jpeg;base64," + imageData!.base64EncodedStringWithOptions(.Encoding64CharacterLineLength))
-        }
+       
         request.addParameterWithKey("mailchimp_subscribe", value: isNews)
         
         if currentUser != nil {
             if currentUser?.fb_id != nil {
-                request.addParameterWithKey("facebook", value: (currentUser?.fb_id)!)
+                request.addParameterWithKey("id", value: (currentUser?.fb_id)!)
                 request.url = ApiUrl.REGISTER_FB
                 if currentUser?.avatar_url != nil {
-                    request.addParameterWithKey("profile_picture", value: (currentUser?.avatar_url)!)
+                    request.addParameterWithKey("image-url", value: (currentUser?.avatar_url)!)
                 }
             }
             
             if currentUser?.google_id != nil {
-                request.addParameterWithKey("google", value: (currentUser?.google_id)!)
+                request.addParameterWithKey("id", value: (currentUser?.google_id)!)
                 if currentUser?.avatar_url != nil {
-                    request.addParameterWithKey("profile_picture", value: (currentUser?.avatar_url)!)
+                    request.addParameterWithKey("image-url", value: (currentUser?.avatar_url)!)
                 }
                 request.url = ApiUrl.REGISTER_GOOGLE
             }
             
+        }else{
+            if avatarImageView.image != nil {
+                imageData = UIImageJPEGRepresentation(avatarImageView.image!, 0.5)
+                request.addParameterWithKey("user_image", value:"data:image/jpeg;base64," + imageData!.base64EncodedStringWithOptions(.Encoding64CharacterLineLength))
+            }
         }
         
         ComManager().postRequestToServer(request, successHandler: { (responseBuilder) in

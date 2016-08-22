@@ -10,5 +10,6 @@ import UIKit
 
 class AppSetting: NSObject {
     static var currentUser:UserModel?
-    
+    static var current_user_id:Int?
+    static var current_user_password:String?
 }

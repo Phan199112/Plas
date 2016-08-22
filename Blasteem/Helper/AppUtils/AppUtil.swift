@@ -15,14 +15,16 @@ class AppUtil {
     class func showLoadingHud()
     {
 //        ProgressHUD .show("", interaction: false)
-//        SVProgressHUD.setDefaultStyle(SVProgressHUDStyle.Dark)
+        SVProgressHUD.setDefaultStyle(.Custom)
+        SVProgressHUD.setBackgroundColor(UIColor(red: 0, green: 0, blue: 0, alpha: 0.6))
+        SVProgressHUD.setForegroundColor(mainColor)
+        
         SVProgressHUD.show()
     }
     
     class func showErrorMessage(message:String)
     {
         ProgressHUD.showError(message)
-//        SVProgressHUD.showImage(UIImage(named: "close_button"), status: message)
     }
     
     class func showSuccess(message:String)
@@ -32,5 +34,14 @@ class AppUtil {
     
     class func disappearLoadingHud() {
         SVProgressHUD.dismiss()
+    }
+    
+    class func delay(delay:Double, closure:()->()) {
+        dispatch_after(
+            dispatch_time(
+                DISPATCH_TIME_NOW,
+                Int64(delay * Double(NSEC_PER_SEC))
+            ),
+            dispatch_get_main_queue(), closure)
     }
 }

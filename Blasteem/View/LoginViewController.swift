@@ -49,7 +49,7 @@ class LoginViewController: UIViewController ,GIDSignInDelegate ,GIDSignInUIDeleg
             topConstraint.constant = -135
             intervalConstraints.constant = 48
         }else{
-            
+            intervalConstraints.constant = 60
         }
         
     }
@@ -84,14 +84,31 @@ class LoginViewController: UIViewController ,GIDSignInDelegate ,GIDSignInUIDeleg
         request.addParameterWithKey("username", value: usernameField.text!)
         request.addParameterWithKey("password", value: passwordField.text!)
         ComManager().postRequestToServer(request, successHandler: { (responseBuilder) in
-                            AppUtil.disappearLoadingHud()
+            
                             if responseBuilder.isSuccessful!
                             {
                                 
-                            }else{
+                                //Go To Home Page
+                                let request1 = RequestBuilder()
+                                request1.url = ApiUrl.GET_ME + String(responseBuilder.loginResponseHandler())
                                 
+                                ComManager().getRequestToServer(request1, successHandler: { (responseBuilder) in
+                                    AppUtil.disappearLoadingHud()
+                                    
+                                    responseBuilder.getUserInfo()
+                                    
+                                    self.performSegueWithIdentifier("segue_login_home", sender: nil)
+                                    
+                                    }, errorHandler: { (error) in
+                                        AppUtil.disappearLoadingHud()
+                                })
+                                
+                            }else{
+                                AppUtil.disappearLoadingHud()
+                                AppUtil.showErrorMessage(responseBuilder.reason!)
                             }
                             }, errorHandler: { (error) in
+                                
                             AppUtil.disappearLoadingHud()
                             
                         })
@@ -134,7 +151,23 @@ class LoginViewController: UIViewController ,GIDSignInDelegate ,GIDSignInUIDeleg
                             AppUtil.disappearLoadingHud()
                             if responseBuilder.isSuccessful!
                             {
-                                //Go to Home Page
+                                //Go To Home Page
+                                let request1 = RequestBuilder()
+                                request1.url = ApiUrl.GET_ME + String(responseBuilder.loginResponseHandler())
+                                
+                                ComManager().getRequestToServer(request1, successHandler: { (responseBuilder) in
+                                    AppUtil.disappearLoadingHud()
+                                    if responseBuilder.isSuccessful!
+                                    {
+                                        responseBuilder.getUserInfo()
+                                        self.performSegueWithIdentifier("segue_login_home", sender: nil)
+                                    }else{
+                                        AppUtil.showErrorMessage(responseBuilder.reason!)
+                                    }
+                                    
+                                    }, errorHandler: { (error) in
+                                        AppUtil.disappearLoadingHud()
+                                })
                             }else{
                                 self.performSegueWithIdentifier("segue_login_register", sender: currentUser)
                             }
@@ -184,14 +217,38 @@ class LoginViewController: UIViewController ,GIDSignInDelegate ,GIDSignInUIDeleg
             request.url = ApiUrl.VALIDATE_GOOGLE
             request.addParameterWithKey("google_id", value: userId!)
             request.addParameterWithKey("user_email", value: email!)
+            AppUtil.showLoadingHud()
             ComManager().postRequestToServer(request, successHandler: { (responseBuilder) in
                 AppUtil.disappearLoadingHud()
                 if responseBuilder.isSuccessful!
                 {
-                    //Go to Home Page
+                    if responseBuilder.validateSocialUser()
+                    {
+                        //Go To Home Page
+                        let request1 = RequestBuilder()
+                        request1.url = ApiUrl.GET_ME + String(responseBuilder.loginResponseHandler())
+                        
+                        ComManager().getRequestToServer(request1, successHandler: { (responseBuilder) in
+                            AppUtil.disappearLoadingHud()
+                            if responseBuilder.isSuccessful!
+                            {
+                                responseBuilder.getUserInfo()
+                                self.performSegueWithIdentifier("segue_login_home", sender: nil)
+                            }else{
+                                AppUtil.showErrorMessage(responseBuilder.reason!)
+                            }
+                            
+                            }, errorHandler: { (error) in
+                                AppUtil.disappearLoadingHud()
+                        })
+                    }else{
+                        self.performSegueWithIdentifier("segue_login_register", sender: currentUser)
+                    }
+                    
                 }else{
-                    self.performSegueWithIdentifier("segue_login_register", sender: currentUser)
+                    AppUtil.showErrorMessage(responseBuilder.reason!)
                 }
+                
                 }, errorHandler: { (error) in
                     AppUtil.disappearLoadingHud()
             })

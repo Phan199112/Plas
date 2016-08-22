@@ -12,6 +12,7 @@ let mainColor = UIColor(red:0.05, green:0.94, blue:0.85, alpha:1.0)
 
 //User Defaults Constants
 let APP_TOKEN = "app_token"
+let IS_LOGIN = "is_login"
 let Current_User = "currentUser"
 struct AppCredential {
     static let API_UNAME = "apiuser"
@@ -34,6 +35,10 @@ struct ApiUrl {
     static let VALIDATE_FB = "wp-json/wp/v2/users/validate-facebook-user"
     static let VALIDATE_GOOGLE = "wp-json/wp/v2/users/validate-google-user"
     static let VALIDATE_USER = "wp-json/wp/v2/users/validate-wpuser-credentials"
+    static let GET_ME = "wp-json/wp/v2/users/"
+    static let RESET_PASSWORD = "wp-json/wp/v2/users/resetpassword"
+    static let GET_VIDEO_LIST = "wp-json/wp/v2/videos/get-video-list"
+    static let GET_CATEGORIES = "wp-json/wp/v2/videos/get_categories"
 }
 
 struct AppFont {

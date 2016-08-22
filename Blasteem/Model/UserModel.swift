@@ -10,7 +10,7 @@
 
 class UserModel: NSObject {
     
-    var user_id:String?
+    var user_id:Int?
     var fb_id:String?
     var google_id:String?
     var avatar_url:String?
@@ -26,7 +26,7 @@ class UserModel: NSObject {
     
     var user_link:String?
     
-    init(user_id:String?, fb_id:String?, google_id:String?, avatar_url :String?,avatar_data:NSData?,firstname:String?,lastname:String?,birthdate:NSDate?,sex:String?,address:String?,email:String?,username:String?,password:String?,user_link:String?) {
+    init(user_id:Int?, fb_id:String?, google_id:String?, avatar_url :String?,avatar_data:NSData?,firstname:String?,lastname:String?,birthdate:NSDate?,sex:String?,address:String?,email:String?,username:String?,password:String?,user_link:String?) {
         
         self.user_id = user_id
         self.fb_id = fb_id
@@ -46,7 +46,7 @@ class UserModel: NSObject {
         
     }
     required convenience init(coder aDecoder:NSCoder) {
-        let user_id = aDecoder.decodeObjectForKey("user_id") as? String
+        let user_id = aDecoder.decodeObjectForKey("user_id") as? Int
         let fb_id = aDecoder.decodeObjectForKey("fb_id") as? String
         let google_id = aDecoder.decodeObjectForKey("google_id") as? String
         
@@ -66,6 +66,9 @@ class UserModel: NSObject {
     }
     
     func encodeWithCoder(aCoder: NSCoder) {
+        aCoder.encodeObject(user_id, forKey: "user_id")
+        aCoder.encodeObject(fb_id, forKey: "fb_id")
+        aCoder.encodeObject(google_id, forKey: "google_id")
         
         aCoder.encodeObject(avatar_url, forKey: "avatar_url")
         aCoder.encodeObject(avatar_data, forKey: "avatar_data")

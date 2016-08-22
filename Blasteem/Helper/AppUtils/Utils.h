@@ -28,22 +28,6 @@ NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
 
 @interface Utils : NSObject
 
-//Show Message to the special View
-+(void)showCautionWithMessage:(NSString*)message showView:(UIView*)view;
-
-//Show Loading View to the special View
-+(void)showLoadingwithMessage:(NSString*)message showView:(UIView*)view;
-
-//Hide Loading Hud
-+ (void)hideLoadingHud;
-
-//Show Loading Hud to View
-+(void)showHudToView:(UIView*)view hudColor:(UIColor*)color;
-
-
-//Hid Hud From View
-+(void)hideHud:(UIView*)view;
-
 //Validate Email
 +(BOOL)validateEmail:(NSString *)emailStr;
 
