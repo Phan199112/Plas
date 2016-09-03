@@ -8,28 +8,236 @@
 
 import UIKit
 
-class UpdateProfileHomeViewController: UIViewController {
+class UpdateProfileHomeViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSource,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
+    var currentUser:UserModel?
+    var pickerType:String = "birthday"
+    @IBOutlet weak var overlayView: UIView!
+    @IBOutlet weak var shadowImageView: UIImageView!
+    @IBOutlet weak var viewheightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var leading: NSLayoutConstraint!
+    @IBOutlet weak var trailing: NSLayoutConstraint!
+    @IBOutlet weak var heightConstraints: NSLayoutConstraint!
+    
+    @IBOutlet weak var typeLabel: UILabel!
+    @IBOutlet weak var sep1View: UIView!
+    
+    @IBOutlet weak var malebutton: UIButton!
+    
+    @IBOutlet weak var femaleButton: UIButton!
+    @IBOutlet weak var birthdayPickerView: UIDatePicker!
+    @IBOutlet weak var countryPickerView: UIPickerView!
+    @IBOutlet weak var sep2View: UIView!
+    @IBOutlet weak var sep3View: UIView!
 
+    @IBOutlet weak var selectButton: UIButton!
+    
+    var containerVC:UpdateProfileTableViewController?
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.countryPickerView.delegate = self
+        self.countryPickerView.dataSource = self
+        
+        self.birthdayPickerView.subviews[0].subviews[1].backgroundColor = UIColor.whiteColor()
+        self.birthdayPickerView.subviews[0].subviews[2].backgroundColor = UIColor.whiteColor()
+        
+        Utils.makeCircleFromRetacgleView(self.selectButton, radius: 3)
     }
+    
+    func showPickerView() {
+        self.overlayView.hidden = false
+        
+        switch pickerType {
+        case "birthday":
+            
+            self.typeLabel.text = "Seleziona la data di nascita"
+            self.birthdayPickerView.hidden = false
+            self.sep1View.hidden = false
+            self.sep2View.hidden = true
+            self.sep3View.hidden = false
+            self.countryPickerView.hidden = true
+            self.malebutton.hidden = true
+            self.femaleButton.hidden = true
+            self.selectButton.hidden = false
+            
+            
+            break
+        case "country":
+            
+            self.typeLabel.text = "Seleziona la provincia"
+            self.birthdayPickerView.hidden = true
+            self.sep1View.hidden = false
+            self.sep2View.hidden = true
+            self.sep3View.hidden = false
+            self.countryPickerView.hidden = false
+            self.malebutton.hidden = true
+            self.femaleButton.hidden = true
+            self.selectButton.hidden = false
+            
+            break
+        case "gender":
+            
+            self.typeLabel.text = "Seleziona il tuo genere"
+            self.birthdayPickerView.hidden = true
+            self.sep1View.hidden = true
+            self.sep2View.hidden = false
+            self.sep3View.hidden = true
+            self.countryPickerView.hidden = true
+            self.malebutton.hidden = false
+            self.femaleButton.hidden = false
+            self.selectButton.hidden = true
+            self.malebutton.setTitle("Maschio", forState: .Normal)
+            self.femaleButton.setTitle("Femmina", forState: .Normal)
+            
+            
+            break
+        case "image":
+            self.typeLabel.text = "Immagine del profilo"
+            self.birthdayPickerView.hidden = true
+            self.sep1View.hidden = true
+            self.sep2View.hidden = false
+            self.sep3View.hidden = true
+            self.countryPickerView.hidden = true
+            self.malebutton.hidden = false
+            self.femaleButton.hidden = false
+            self.selectButton.hidden = true
+            
+            
+            self.malebutton.setTitle("Scatta nuova foto", forState: .Normal)
+            self.femaleButton.setTitle("Seleziona foto esistente", forState: .Normal)
+            break
+        case "terms":
+            self.typeLabel.text = "Termini e le condizioni"
+            self.selectButton.setTitle("FATTO", forState: .Normal)
+            
+            self.birthdayPickerView.hidden = true
+            self.sep1View.hidden = true
+            self.sep2View.hidden = true
+            self.sep3View.hidden = true
+            self.countryPickerView.hidden = true
+            self.malebutton.hidden = true
+            self.femaleButton.hidden = true
+            self.selectButton.hidden = false
+            
+            
+            break
+        default:
+            break
+        }
+    }
+
+    //PickerViewDelegate and DataSources
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        
+        return province_arr.count
+        
+    }
+    
+    
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        
+        return province_arr[row]
+    }
+    
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1;
+    }
+    
+    func pickerView(pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+        return 40.0
+    }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    @IBAction func onBack(sender: AnyObject) {
+        self.navigationController?.popViewControllerAnimated(true)
+    }
     
+    @IBAction func onSelectButton(sender: AnyObject) {
+        switch pickerType {
+        case "birthday":
+            self.overlayView.hidden = true
+            self.containerVC?.ageField.text = self.birthdayPickerView.date.beginningOfDay().stringWithFormat("dd-MM-YYYY")
+            
+            break
+        case "country":
+            self.overlayView.hidden = true
+            self.containerVC?.addressField.text = province_arr[self.countryPickerView.selectedRowInComponent(0)]
+            break
+            
+        case "terms":
+            self.overlayView.hidden = true
+            break
+        default:
+            break
+        }
+    }
+    
+    
+    @IBAction func onMale(sender: AnyObject) {
+        if pickerType == "gender" {
+            self.overlayView.hidden = true
+            self.containerVC?.sexField.text = sex_arr[0]
+        }else{
+            self.overlayView.hidden = true
+            let imagePicker = UIImagePickerController()
+            imagePicker.sourceType = .Camera
+            imagePicker.allowsEditing = true
+            imagePicker.delegate = self
+            self.presentViewController(imagePicker, animated: true, completion: nil)
+        }
+        
+    }
+    
+    @IBAction func onFemale(sender: AnyObject) {
+        if pickerType == "gender" {
+            self.overlayView.hidden = true
+            self.containerVC?.sexField.text = sex_arr[1]
+        }else{
+            self.overlayView.hidden = true
+            let imagePicker = UIImagePickerController()
+            imagePicker.sourceType = .PhotoLibrary
+            imagePicker.allowsEditing = true
+            imagePicker.delegate = self
+            self.presentViewController(imagePicker, animated: true, completion: nil)
+        }
+        
+    }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "segue_container_update" {
+            let container = segue.destinationViewController as? UpdateProfileTableViewController
+            container?.homeVC = self
+            self.containerVC = container
+            segue.destinationViewController.setValue(currentUser, forKey: "currentUser")
+        }
     }
-    */
+    override func shouldAutorotate() -> Bool {
+        return false
+    }
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        
+        containerVC!.currentUser?.avatar_data = UIImageJPEGRepresentation(info[UIImagePickerControllerEditedImage] as! UIImage, 0.5)
+        containerVC!.avatarImageView.image = info[UIImagePickerControllerEditedImage] as? UIImage
+        picker.dismissViewControllerAnimated(true) {
+            
+        }
+        
+    }
+    
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        picker.dismissViewControllerAnimated(true) {
+            
+        }
+        
+    }
+
 
 }

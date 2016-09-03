@@ -25,6 +25,7 @@ class UserModel: NSObject {
     var password:String?
     
     var user_link:String?
+    var is_agreed_news:Bool?
     
     init(user_id:Int?, fb_id:String?, google_id:String?, avatar_url :String?,avatar_data:NSData?,firstname:String?,lastname:String?,birthdate:NSDate?,sex:String?,address:String?,email:String?,username:String?,password:String?,user_link:String?) {
         
@@ -43,6 +44,7 @@ class UserModel: NSObject {
         self.username = username
         self.password = password
         self.user_link = user_link
+        
         
     }
     required convenience init(coder aDecoder:NSCoder) {

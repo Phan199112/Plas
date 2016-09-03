@@ -72,7 +72,7 @@ static void * IBFloatingHeaderViewContext = &IBFloatingHeaderViewContext;
 -(void)_scrolledFromOffset:(CGFloat)oldYOffset toOffset:(CGFloat)newYOffset{
     CGPoint scrollVelocity = [[self panGestureRecognizer] velocityInView:self];
     BOOL fastSwipe = NO;
-    if(abs(scrollVelocity.y)>1000){
+    if(abs(scrollVelocity.y)>10){
         fastSwipe = YES;
     }
     BOOL isHeaderShowing = self.floatingHeaderView.frame.origin.y+self.floatingHeaderView.frame.size.height>=newYOffset;

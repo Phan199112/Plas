@@ -41,6 +41,9 @@ class ViewManager: NSObject {
                 let user = NSKeyedUnarchiver.unarchiveObjectWithData(decoded) as? UserModel
                 AppSetting.currentUser = user
             }
+            if let current_user_id = USER_DEFAULTS.objectForKey(Current_User_ID) as? Int{
+                AppSetting.current_user_id = current_user_id
+            }
         }else{
             rootNavVC = RootNavViewController(rootViewController: loginVC!)
             
@@ -54,7 +57,35 @@ class ViewManager: NSObject {
     
     func showLoginPage() {
         USER_DEFAULTS.setBool(false, forKey: IS_LOGIN)
+        USER_DEFAULTS.setObject(nil, forKey: Current_User_ID)
         setRootVC()
     }
-
+    
+    func showVideoPage(video:VideoModel,homeVC:HomeViewController?,creatorVC:CreatorDetailTableViewController?) {
+        let videoVC = storyBoard.instantiateViewControllerWithIdentifier("VideoDetailViewController") as? VideoDetailViewController
+        videoVC?.video = video
+        videoVC?.homeVC = homeVC
+        videoVC?.creatorVC = creatorVC
+        rootNavVC?.pushViewController(videoVC!, animated: true)
+    }
+    
+    func showWebPage(video_url:String,title:String)  {
+        let webPage = self.storyBoard.instantiateViewControllerWithIdentifier("WebViewController") as! WebViewController
+        webPage.post_title = title
+        webPage.url = video_url
+        rootNavVC?.pushViewController(webPage, animated: false)
+    }
+    
+    func showUpdateProfilePage(user:UserModel) {
+        let updateProfileVC = storyBoard.instantiateViewControllerWithIdentifier("UpdateProfileHomeViewController") as? UpdateProfileHomeViewController
+        updateProfileVC?.currentUser = user
+        rootNavVC?.pushViewController(updateProfileVC!, animated: true)
+    }
+    
+    func showResetPasswordPage() {
+        let resetVC = storyBoard.instantiateViewControllerWithIdentifier("ResetPasswordViewController") as? ResetPasswordViewController
+        
+        rootNavVC?.pushViewController(resetVC!, animated: true)
+    }
+    
 }

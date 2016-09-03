@@ -8,8 +8,11 @@
 
 import UIKit
 
+
 class CommentHeaderView: UIView {
 
+    @IBOutlet weak var commentButton: UIButton!
+       @IBOutlet weak var commentField: UITextField!
     /*
     // Only override drawRect: if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
@@ -17,5 +20,6 @@ class CommentHeaderView: UIView {
         // Drawing code
     }
     */
-
+       
+ 
 }

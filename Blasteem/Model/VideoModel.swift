@@ -9,7 +9,7 @@
 import UIKit
 
 class VideoModel: NSObject {
-    var video_id:Int?
+    var video_id:String?
     var creator:CreatorModel?
     var like_count:Int?
     var post_date:String?
@@ -17,7 +17,10 @@ class VideoModel: NSObject {
     var blast_count:Int?
     var view_count:Int?
     var video_image:String?
-    var some_id:Int?
+    var blast_id:String?
     var post_content:String?
-    
+    var is_following_creator:Bool = false
+    var is_blasted:Bool?
+    var video_url:String?
+    var is_read:Bool?
 }

@@ -26,10 +26,29 @@
 		0A1D64051D6AF33900C38C7E /* CategoryDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1D64031D6AF33900C38C7E /* CategoryDetailTableViewCell.swift */; };
 		0A1D64061D6AF33900C38C7E /* CategoryDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A1D64041D6AF33900C38C7E /* CategoryDetailTableViewCell.xib */; };
 		0A1D64081D6B826200C38C7E /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1D64071D6B826200C38C7E /* CategoryModel.swift */; };
+		0A1D640B1D6BEE4100C38C7E /* CreatorListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1D640A1D6BEE4100C38C7E /* CreatorListTableViewController.swift */; };
+		0A1D640E1D6BEE9700C38C7E /* CreatorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1D640C1D6BEE9700C38C7E /* CreatorTableViewCell.swift */; };
+		0A1D640F1D6BEE9700C38C7E /* CreatorTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A1D640D1D6BEE9700C38C7E /* CreatorTableViewCell.xib */; };
+		0A1D64111D6BFDC500C38C7E /* CreatorDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1D64101D6BFDC500C38C7E /* CreatorDetailTableViewController.swift */; };
 		0A2678621D64AE5900DCB621 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2678611D64AE5900DCB621 /* AppDelegate.swift */; };
 		0A2678671D64AE5900DCB621 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A2678651D64AE5900DCB621 /* Main.storyboard */; };
 		0A2678691D64AE5900DCB621 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A2678681D64AE5900DCB621 /* Assets.xcassets */; };
 		0A26786C1D64AE5900DCB621 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A26786A1D64AE5900DCB621 /* LaunchScreen.storyboard */; };
+		0A3364F21D75321E001AE324 /* PushNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A3364F11D75321D001AE324 /* PushNotifications.framework */; };
+		0A3364F71D753787001AE324 /* MeetNewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3364F61D753787001AE324 /* MeetNewsTableViewController.swift */; };
+		0A3364FA1D7537CF001AE324 /* MeetNewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3364F81D7537CF001AE324 /* MeetNewsTableViewCell.swift */; };
+		0A3364FB1D7537CF001AE324 /* MeetNewsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A3364F91D7537CF001AE324 /* MeetNewsTableViewCell.xib */; };
+		0A3364FE1D75691F001AE324 /* NotificationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3364FD1D75691F001AE324 /* NotificationTableViewController.swift */; };
+		0A3365011D7569B8001AE324 /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3364FF1D7569B8001AE324 /* NotificationTableViewCell.swift */; };
+		0A3365021D7569B8001AE324 /* NotificationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A3365001D7569B8001AE324 /* NotificationTableViewCell.xib */; };
+		0A3AA9821D6F783B00F4DEC9 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3AA9801D6F783B00F4DEC9 /* CommentTableViewCell.swift */; };
+		0A3AA9831D6F783B00F4DEC9 /* CommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A3AA9811D6F783B00F4DEC9 /* CommentTableViewCell.xib */; };
+		0A3AA9851D6F7A0200F4DEC9 /* CommentHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3AA9841D6F7A0200F4DEC9 /* CommentHeaderView.swift */; };
+		0A3AA9871D6F7A1100F4DEC9 /* CommentHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A3AA9861D6F7A1100F4DEC9 /* CommentHeaderView.xib */; };
+		0A3AA98C1D6F86C800F4DEC9 /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3AA98B1D6F86C800F4DEC9 /* ProfileTableViewController.swift */; };
+		0A3AA98E1D6F879E00F4DEC9 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3AA98D1D6F879E00F4DEC9 /* ResetPasswordViewController.swift */; };
+		0A3AA9901D6F87DC00F4DEC9 /* UpdateProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3AA98F1D6F87DC00F4DEC9 /* UpdateProfileTableViewController.swift */; };
+		0A3AA9921D6F941100F4DEC9 /* UpdateProfileHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3AA9911D6F941100F4DEC9 /* UpdateProfileHomeViewController.swift */; };
 		0A3FC58C1D65450C006615BA /* Apache License.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0A3FC5811D65450C006615BA /* Apache License.txt */; };
 		0A3FC58D1D65450C006615BA /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0A3FC5821D65450C006615BA /* OpenSans-Bold.ttf */; };
 		0A3FC58E1D65450C006615BA /* OpenSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0A3FC5831D65450C006615BA /* OpenSans-BoldItalic.ttf */; };
@@ -57,6 +76,17 @@
 		0A3FC5DC1D66849E006615BA /* TOActionSheetLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0A3FC5CD1D66849E006615BA /* TOActionSheetLocalizable.strings */; };
 		0A3FC5DD1D66849F006615BA /* TOActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A3FC5D91D66849E006615BA /* TOActionSheet.m */; };
 		0A3FC5E01D670F5E006615BA /* NSDate+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A3FC5DF1D670F5E006615BA /* NSDate+Helper.m */; };
+		0A4F692F1D6D5E7C002A74AF /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4F692E1D6D5E7C002A74AF /* WebViewController.swift */; };
+		0A4F69321D6D663A002A74AF /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4F69311D6D663A002A74AF /* SearchViewController.swift */; };
+		0A4F69361D6E3DDD002A74AF /* KLCPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4F69351D6E3DDD002A74AF /* KLCPopup.m */; };
+		0A4F69381D6E3EC1002A74AF /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4F69371D6E3EC1002A74AF /* ErrorView.swift */; };
+		0A4F693A1D6E3ECE002A74AF /* SuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4F69391D6E3ECE002A74AF /* SuccessView.swift */; };
+		0A4F693C1D6E3EE3002A74AF /* ErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A4F693B1D6E3EE3002A74AF /* ErrorView.xib */; };
+		0A4F693E1D6E3EF2002A74AF /* SuccessView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A4F693D1D6E3EF2002A74AF /* SuccessView.xib */; };
+		0A4F69411D6E4874002A74AF /* VideoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4F69401D6E4874002A74AF /* VideoDetailViewController.swift */; };
+		0A9DC3BD1D724A7400123681 /* UIScrollView+IBFloatingHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A9DC3BC1D724A7400123681 /* UIScrollView+IBFloatingHeader.m */; };
+		0A9DC3C01D72703F00123681 /* CreatorProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9DC3BE1D72703F00123681 /* CreatorProfileTableViewCell.swift */; };
+		0A9DC3C11D72703F00123681 /* CreatorProfileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A9DC3BF1D72703F00123681 /* CreatorProfileTableViewCell.xib */; };
 		0AAACDC11D680E77007C3CCC /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAACDC01D680E77007C3CCC /* ForgotPasswordViewController.swift */; };
 		0AAACDC31D6881D7007C3CCC /* ViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAACDC21D6881D7007C3CCC /* ViewManager.swift */; };
 		0AAACDC71D688269007C3CCC /* RootNavViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAACDC61D688269007C3CCC /* RootNavViewController.swift */; };
@@ -73,6 +103,13 @@
 		0AAACDE81D6A5F00007C3CCC /* UIScrollView+SVInfiniteScrolling.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AAACDE51D6A5F00007C3CCC /* UIScrollView+SVInfiniteScrolling.m */; };
 		0AAACDE91D6A5F00007C3CCC /* UIScrollView+SVPullToRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AAACDE71D6A5F00007C3CCC /* UIScrollView+SVPullToRefresh.m */; };
 		0AAACDEB1D6A92BF007C3CCC /* CreatorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAACDEA1D6A92BF007C3CCC /* CreatorModel.swift */; };
+		0ABE93891D70F7CC00EBACFB /* LandScapeVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABE93871D70F7CC00EBACFB /* LandScapeVideoViewController.swift */; };
+		0ABE938A1D70F7CC00EBACFB /* LandScapeVideoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0ABE93881D70F7CC00EBACFB /* LandScapeVideoViewController.xib */; };
+		0AFBAD311D6E7B7D0088B605 /* RelateVideoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFBAD2F1D6E7B7D0088B605 /* RelateVideoTableViewCell.swift */; };
+		0AFBAD321D6E7B7D0088B605 /* RelateVideoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AFBAD301D6E7B7D0088B605 /* RelateVideoTableViewCell.xib */; };
+		0AFBAD341D6EAEEE0088B605 /* VideoDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFBAD331D6EAEEE0088B605 /* VideoDetailHeaderView.swift */; };
+		0AFBAD361D6EAF090088B605 /* VideoDetailHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AFBAD351D6EAF090088B605 /* VideoDetailHeaderView.xib */; };
+		0AFBAD381D6EC0440088B605 /* CommentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFBAD371D6EC0440088B605 /* CommentModel.swift */; };
 		A4B8866BF32CCC2C22064985 /* Pods_Blasteem.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4736BCCB45224562D24F68C /* Pods_Blasteem.framework */; };
 /* End PBXBuildFile section */
 
@@ -123,12 +160,31 @@
 		0A1D64031D6AF33900C38C7E /* CategoryDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryDetailTableViewCell.swift; sourceTree = "<group>"; };
 		0A1D64041D6AF33900C38C7E /* CategoryDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CategoryDetailTableViewCell.xib; sourceTree = "<group>"; };
 		0A1D64071D6B826200C38C7E /* CategoryModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
+		0A1D640A1D6BEE4100C38C7E /* CreatorListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreatorListTableViewController.swift; sourceTree = "<group>"; };
+		0A1D640C1D6BEE9700C38C7E /* CreatorTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreatorTableViewCell.swift; sourceTree = "<group>"; };
+		0A1D640D1D6BEE9700C38C7E /* CreatorTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreatorTableViewCell.xib; sourceTree = "<group>"; };
+		0A1D64101D6BFDC500C38C7E /* CreatorDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreatorDetailTableViewController.swift; sourceTree = "<group>"; };
 		0A26785E1D64AE5900DCB621 /* Blasteem.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Blasteem.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A2678611D64AE5900DCB621 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0A2678661D64AE5900DCB621 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0A2678681D64AE5900DCB621 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0A26786B1D64AE5900DCB621 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0A26786D1D64AE5900DCB621 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0A3364F11D75321D001AE324 /* PushNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PushNotifications.framework; sourceTree = "<group>"; };
+		0A3364F61D753787001AE324 /* MeetNewsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetNewsTableViewController.swift; sourceTree = "<group>"; };
+		0A3364F81D7537CF001AE324 /* MeetNewsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetNewsTableViewCell.swift; sourceTree = "<group>"; };
+		0A3364F91D7537CF001AE324 /* MeetNewsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MeetNewsTableViewCell.xib; sourceTree = "<group>"; };
+		0A3364FD1D75691F001AE324 /* NotificationTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationTableViewController.swift; sourceTree = "<group>"; };
+		0A3364FF1D7569B8001AE324 /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
+		0A3365001D7569B8001AE324 /* NotificationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotificationTableViewCell.xib; sourceTree = "<group>"; };
+		0A3AA9801D6F783B00F4DEC9 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
+		0A3AA9811D6F783B00F4DEC9 /* CommentTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentTableViewCell.xib; sourceTree = "<group>"; };
+		0A3AA9841D6F7A0200F4DEC9 /* CommentHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentHeaderView.swift; sourceTree = "<group>"; };
+		0A3AA9861D6F7A1100F4DEC9 /* CommentHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentHeaderView.xib; sourceTree = "<group>"; };
+		0A3AA98B1D6F86C800F4DEC9 /* ProfileTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
+		0A3AA98D1D6F879E00F4DEC9 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
+		0A3AA98F1D6F87DC00F4DEC9 /* UpdateProfileTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateProfileTableViewController.swift; sourceTree = "<group>"; };
+		0A3AA9911D6F941100F4DEC9 /* UpdateProfileHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateProfileHomeViewController.swift; sourceTree = "<group>"; };
 		0A3FC5811D65450C006615BA /* Apache License.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Apache License.txt"; sourceTree = "<group>"; };
 		0A3FC5821D65450C006615BA /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
 		0A3FC5831D65450C006615BA /* OpenSans-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-BoldItalic.ttf"; sourceTree = "<group>"; };
@@ -172,6 +228,19 @@
 		0A3FC5DB1D66849E006615BA /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/TOActionSheetLocalizable.strings"; sourceTree = "<group>"; };
 		0A3FC5DE1D670F5E006615BA /* NSDate+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Helper.h"; sourceTree = "<group>"; };
 		0A3FC5DF1D670F5E006615BA /* NSDate+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Helper.m"; sourceTree = "<group>"; };
+		0A4F692E1D6D5E7C002A74AF /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		0A4F69311D6D663A002A74AF /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		0A4F69341D6E3DDD002A74AF /* KLCPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KLCPopup.h; sourceTree = "<group>"; };
+		0A4F69351D6E3DDD002A74AF /* KLCPopup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KLCPopup.m; sourceTree = "<group>"; };
+		0A4F69371D6E3EC1002A74AF /* ErrorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
+		0A4F69391D6E3ECE002A74AF /* SuccessView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuccessView.swift; sourceTree = "<group>"; };
+		0A4F693B1D6E3EE3002A74AF /* ErrorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ErrorView.xib; sourceTree = "<group>"; };
+		0A4F693D1D6E3EF2002A74AF /* SuccessView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SuccessView.xib; sourceTree = "<group>"; };
+		0A4F69401D6E4874002A74AF /* VideoDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoDetailViewController.swift; sourceTree = "<group>"; };
+		0A9DC3BB1D724A7400123681 /* UIScrollView+IBFloatingHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+IBFloatingHeader.h"; sourceTree = "<group>"; };
+		0A9DC3BC1D724A7400123681 /* UIScrollView+IBFloatingHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+IBFloatingHeader.m"; sourceTree = "<group>"; };
+		0A9DC3BE1D72703F00123681 /* CreatorProfileTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreatorProfileTableViewCell.swift; sourceTree = "<group>"; };
+		0A9DC3BF1D72703F00123681 /* CreatorProfileTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreatorProfileTableViewCell.xib; sourceTree = "<group>"; };
 		0AAACDC01D680E77007C3CCC /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		0AAACDC21D6881D7007C3CCC /* ViewManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewManager.swift; sourceTree = "<group>"; };
 		0AAACDC61D688269007C3CCC /* RootNavViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootNavViewController.swift; sourceTree = "<group>"; };
@@ -192,6 +261,13 @@
 		0AAACDE61D6A5F00007C3CCC /* UIScrollView+SVPullToRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+SVPullToRefresh.h"; sourceTree = "<group>"; };
 		0AAACDE71D6A5F00007C3CCC /* UIScrollView+SVPullToRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+SVPullToRefresh.m"; sourceTree = "<group>"; };
 		0AAACDEA1D6A92BF007C3CCC /* CreatorModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreatorModel.swift; sourceTree = "<group>"; };
+		0ABE93871D70F7CC00EBACFB /* LandScapeVideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandScapeVideoViewController.swift; sourceTree = "<group>"; };
+		0ABE93881D70F7CC00EBACFB /* LandScapeVideoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LandScapeVideoViewController.xib; sourceTree = "<group>"; };
+		0AFBAD2F1D6E7B7D0088B605 /* RelateVideoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelateVideoTableViewCell.swift; sourceTree = "<group>"; };
+		0AFBAD301D6E7B7D0088B605 /* RelateVideoTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RelateVideoTableViewCell.xib; sourceTree = "<group>"; };
+		0AFBAD331D6EAEEE0088B605 /* VideoDetailHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoDetailHeaderView.swift; sourceTree = "<group>"; };
+		0AFBAD351D6EAF090088B605 /* VideoDetailHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoDetailHeaderView.xib; sourceTree = "<group>"; };
+		0AFBAD371D6EC0440088B605 /* CommentModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentModel.swift; sourceTree = "<group>"; };
 		2A21F64774B65EC6880587CB /* Pods-Blasteem.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Blasteem.release.xcconfig"; path = "Pods/Target Support Files/Pods-Blasteem/Pods-Blasteem.release.xcconfig"; sourceTree = "<group>"; };
 		E4B24D9AFF960F6E205D9C10 /* Pods-Blasteem.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Blasteem.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Blasteem/Pods-Blasteem.debug.xcconfig"; sourceTree = "<group>"; };
 		F4736BCCB45224562D24F68C /* Pods_Blasteem.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Blasteem.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -203,6 +279,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A4B8866BF32CCC2C22064985 /* Pods_Blasteem.framework in Frameworks */,
+				0A3364F21D75321E001AE324 /* PushNotifications.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,6 +342,19 @@
 			name = Category;
 			sourceTree = "<group>";
 		};
+		0A1D64091D6BEE2A00C38C7E /* Creator */ = {
+			isa = PBXGroup;
+			children = (
+				0A1D640A1D6BEE4100C38C7E /* CreatorListTableViewController.swift */,
+				0A1D640C1D6BEE9700C38C7E /* CreatorTableViewCell.swift */,
+				0A1D640D1D6BEE9700C38C7E /* CreatorTableViewCell.xib */,
+				0A1D64101D6BFDC500C38C7E /* CreatorDetailTableViewController.swift */,
+				0A9DC3BE1D72703F00123681 /* CreatorProfileTableViewCell.swift */,
+				0A9DC3BF1D72703F00123681 /* CreatorProfileTableViewCell.xib */,
+			);
+			name = Creator;
+			sourceTree = "<group>";
+		};
 		0A2678551D64AE5900DCB621 = {
 			isa = PBXGroup;
 			children = (
@@ -301,6 +391,37 @@
 				0A3FC5A11D655A1E006615BA /* Blasteem-Bridging-Header.h */,
 			);
 			path = Blasteem;
+			sourceTree = "<group>";
+		};
+		0A3364F51D753769001AE324 /* MeetNews */ = {
+			isa = PBXGroup;
+			children = (
+				0A3364F61D753787001AE324 /* MeetNewsTableViewController.swift */,
+				0A3364F81D7537CF001AE324 /* MeetNewsTableViewCell.swift */,
+				0A3364F91D7537CF001AE324 /* MeetNewsTableViewCell.xib */,
+			);
+			name = MeetNews;
+			sourceTree = "<group>";
+		};
+		0A3364FC1D756909001AE324 /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				0A3364FD1D75691F001AE324 /* NotificationTableViewController.swift */,
+				0A3364FF1D7569B8001AE324 /* NotificationTableViewCell.swift */,
+				0A3365001D7569B8001AE324 /* NotificationTableViewCell.xib */,
+			);
+			name = Notification;
+			sourceTree = "<group>";
+		};
+		0A3AA98A1D6F86BC00F4DEC9 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				0A3AA98B1D6F86C800F4DEC9 /* ProfileTableViewController.swift */,
+				0A3AA98D1D6F879E00F4DEC9 /* ResetPasswordViewController.swift */,
+				0A3AA98F1D6F87DC00F4DEC9 /* UpdateProfileTableViewController.swift */,
+				0A3AA9911D6F941100F4DEC9 /* UpdateProfileHomeViewController.swift */,
+			);
+			name = Profile;
 			sourceTree = "<group>";
 		};
 		0A3FC57F1D65450C006615BA /* Resource */ = {
@@ -343,6 +464,8 @@
 		0A3FC5981D655365006615BA /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				0A9DC3BA1D724A7400123681 /* IBScrollViewFloatingHeader */,
+				0A4F69331D6E3DDD002A74AF /* KLCPopup */,
 				0AAACDE21D6A5F00007C3CCC /* SVPullToRefresh */,
 				0AAACDDA1D6945CF007C3CCC /* RevealController */,
 				0AAACDCA1D68CDF6007C3CCC /* DPSegmentedControl.swift */,
@@ -365,6 +488,7 @@
 				0AAACDE01D696C1B007C3CCC /* VideoModel.swift */,
 				0AAACDEA1D6A92BF007C3CCC /* CreatorModel.swift */,
 				0A1D64071D6B826200C38C7E /* CategoryModel.swift */,
+				0AFBAD371D6EC0440088B605 /* CommentModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -372,6 +496,13 @@
 		0A3FC59A1D655365006615BA /* View */ = {
 			isa = PBXGroup;
 			children = (
+				0A3364FC1D756909001AE324 /* Notification */,
+				0A3364F51D753769001AE324 /* MeetNews */,
+				0A3364F11D75321D001AE324 /* PushNotifications.framework */,
+				0A3AA98A1D6F86BC00F4DEC9 /* Profile */,
+				0A4F693F1D6E4610002A74AF /* VideoDetail */,
+				0A4F69301D6D65C3002A74AF /* Search */,
+				0A1D64091D6BEE2A00C38C7E /* Creator */,
 				0A1D63F81D6AF2C100C38C7E /* Category */,
 				0AAACDC51D688245007C3CCC /* Home */,
 				0AAACDC41D68822D007C3CCC /* Authentication */,
@@ -385,6 +516,10 @@
 				0A3FC59E1D6559FB006615BA /* Utils.h */,
 				0A3FC59F1D6559FB006615BA /* Utils.m */,
 				0A3FC5B81D6570B6006615BA /* AppUtil.swift */,
+				0A4F69371D6E3EC1002A74AF /* ErrorView.swift */,
+				0A4F693B1D6E3EE3002A74AF /* ErrorView.xib */,
+				0A4F69391D6E3ECE002A74AF /* SuccessView.swift */,
+				0A4F693D1D6E3EF2002A74AF /* SuccessView.xib */,
 			);
 			path = AppUtils;
 			sourceTree = "<group>";
@@ -406,6 +541,50 @@
 				0A3FC5D91D66849E006615BA /* TOActionSheet.m */,
 			);
 			path = TOActionSheet;
+			sourceTree = "<group>";
+		};
+		0A4F69301D6D65C3002A74AF /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				0A4F69311D6D663A002A74AF /* SearchViewController.swift */,
+			);
+			name = Search;
+			sourceTree = "<group>";
+		};
+		0A4F69331D6E3DDD002A74AF /* KLCPopup */ = {
+			isa = PBXGroup;
+			children = (
+				0A4F69341D6E3DDD002A74AF /* KLCPopup.h */,
+				0A4F69351D6E3DDD002A74AF /* KLCPopup.m */,
+			);
+			path = KLCPopup;
+			sourceTree = "<group>";
+		};
+		0A4F693F1D6E4610002A74AF /* VideoDetail */ = {
+			isa = PBXGroup;
+			children = (
+				0A4F69401D6E4874002A74AF /* VideoDetailViewController.swift */,
+				0AFBAD2F1D6E7B7D0088B605 /* RelateVideoTableViewCell.swift */,
+				0AFBAD301D6E7B7D0088B605 /* RelateVideoTableViewCell.xib */,
+				0AFBAD331D6EAEEE0088B605 /* VideoDetailHeaderView.swift */,
+				0AFBAD351D6EAF090088B605 /* VideoDetailHeaderView.xib */,
+				0A3AA9801D6F783B00F4DEC9 /* CommentTableViewCell.swift */,
+				0A3AA9811D6F783B00F4DEC9 /* CommentTableViewCell.xib */,
+				0A3AA9841D6F7A0200F4DEC9 /* CommentHeaderView.swift */,
+				0A3AA9861D6F7A1100F4DEC9 /* CommentHeaderView.xib */,
+				0ABE93871D70F7CC00EBACFB /* LandScapeVideoViewController.swift */,
+				0ABE93881D70F7CC00EBACFB /* LandScapeVideoViewController.xib */,
+			);
+			name = VideoDetail;
+			sourceTree = "<group>";
+		};
+		0A9DC3BA1D724A7400123681 /* IBScrollViewFloatingHeader */ = {
+			isa = PBXGroup;
+			children = (
+				0A9DC3BB1D724A7400123681 /* UIScrollView+IBFloatingHeader.h */,
+				0A9DC3BC1D724A7400123681 /* UIScrollView+IBFloatingHeader.m */,
+			);
+			path = IBScrollViewFloatingHeader;
 			sourceTree = "<group>";
 		};
 		0AAACDC41D68822D007C3CCC /* Authentication */ = {
@@ -430,6 +609,7 @@
 				0AAACDD41D68EA00007C3CCC /* HomeTableViewCell.swift */,
 				0AAACDD51D68EA00007C3CCC /* HomeTableViewCell.xib */,
 				0AAACDDE1D6947DF007C3CCC /* MenuTableViewController.swift */,
+				0A4F692E1D6D5E7C002A74AF /* WebViewController.swift */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -507,7 +687,12 @@
 				TargetAttributes = {
 					0A26785D1D64AE5900DCB621 = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = 35MZKTC24G;
+						DevelopmentTeam = 4F4T892EPR;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -556,20 +741,31 @@
 				0A1A33FB1D67A80200EC75BA /* Info.plist in Resources */,
 				0A3FC5CB1D6650E2006615BA /* GoogleService-Info.plist in Resources */,
 				0A26786C1D64AE5900DCB621 /* LaunchScreen.storyboard in Resources */,
+				0ABE938A1D70F7CC00EBACFB /* LandScapeVideoViewController.xib in Resources */,
+				0AFBAD321D6E7B7D0088B605 /* RelateVideoTableViewCell.xib in Resources */,
 				0A3FC5951D65450C006615BA /* OpenSans-Semibold.ttf in Resources */,
+				0A9DC3C11D72703F00123681 /* CreatorProfileTableViewCell.xib in Resources */,
 				0A3FC58F1D65450C006615BA /* OpenSans-ExtraBold.ttf in Resources */,
+				0AFBAD361D6EAF090088B605 /* VideoDetailHeaderView.xib in Resources */,
 				0A3FC58C1D65450C006615BA /* Apache License.txt in Resources */,
 				0A3FC5931D65450C006615BA /* OpenSans-LightItalic.ttf in Resources */,
 				0A3FC5DC1D66849E006615BA /* TOActionSheetLocalizable.strings in Resources */,
 				0A1D64061D6AF33900C38C7E /* CategoryDetailTableViewCell.xib in Resources */,
+				0A3364FB1D7537CF001AE324 /* MeetNewsTableViewCell.xib in Resources */,
 				0A2678691D64AE5900DCB621 /* Assets.xcassets in Resources */,
+				0A4F693E1D6E3EF2002A74AF /* SuccessView.xib in Resources */,
+				0A4F693C1D6E3EE3002A74AF /* ErrorView.xib in Resources */,
+				0A3AA9831D6F783B00F4DEC9 /* CommentTableViewCell.xib in Resources */,
+				0A1D640F1D6BEE9700C38C7E /* CreatorTableViewCell.xib in Resources */,
 				0A1D64001D6AF30300C38C7E /* CategoryListTableViewCell.xib in Resources */,
 				0A3FC58D1D65450C006615BA /* OpenSans-Bold.ttf in Resources */,
 				0A1A33FA1D67A80200EC75BA /* TOCropViewControllerLocalizable.strings in Resources */,
+				0A3365021D7569B8001AE324 /* NotificationTableViewCell.xib in Resources */,
 				0A2678671D64AE5900DCB621 /* Main.storyboard in Resources */,
 				0A3FC5961D65450C006615BA /* OpenSans-SemiboldItalic.ttf in Resources */,
 				0A3FC5921D65450C006615BA /* OpenSans-Light.ttf in Resources */,
 				0A3FC5941D65450C006615BA /* OpenSans-Regular.ttf in Resources */,
+				0A3AA9871D6F7A1100F4DEC9 /* CommentHeaderView.xib in Resources */,
 				0A3FC5901D65450C006615BA /* OpenSans-ExtraBoldItalic.ttf in Resources */,
 				0AAACDD71D68EA00007C3CCC /* HomeTableViewCell.xib in Resources */,
 			);
@@ -630,49 +826,74 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A3AA9901D6F87DC00F4DEC9 /* UpdateProfileTableViewController.swift in Sources */,
+				0A1D640B1D6BEE4100C38C7E /* CreatorListTableViewController.swift in Sources */,
 				0A3FC5BF1D65CCC2006615BA /* AppTokenModel.swift in Sources */,
 				0A3FC5C91D664AAE006615BA /* ProgressHUD.m in Sources */,
 				0AAACDCD1D68CECC007C3CCC /* HomeViewController.swift in Sources */,
 				0A3FC5C51D660544006615BA /* RequestBuilder.swift in Sources */,
+				0A3364FE1D75691F001AE324 /* NotificationTableViewController.swift in Sources */,
 				0A1A33FD1D67A80200EC75BA /* TOCroppedImageAttributes.m in Sources */,
+				0A3AA98C1D6F86C800F4DEC9 /* ProfileTableViewController.swift in Sources */,
+				0A1D640E1D6BEE9700C38C7E /* CreatorTableViewCell.swift in Sources */,
 				0A3FC5BB1D65CB90006615BA /* ComManager.swift in Sources */,
 				0A3FC5C31D66032D006615BA /* RegisterTableViewController.swift in Sources */,
 				0A1A34041D67A80200EC75BA /* TOCropView.m in Sources */,
+				0AFBAD381D6EC0440088B605 /* CommentModel.swift in Sources */,
 				0AAACDE91D6A5F00007C3CCC /* UIScrollView+SVPullToRefresh.m in Sources */,
+				0A4F69381D6E3EC1002A74AF /* ErrorView.swift in Sources */,
 				0A3FC5B91D6570B6006615BA /* AppUtil.swift in Sources */,
+				0A4F69411D6E4874002A74AF /* VideoDetailViewController.swift in Sources */,
 				0A3FC5E01D670F5E006615BA /* NSDate+Helper.m in Sources */,
 				0A1A34001D67A80200EC75BA /* TOCropViewController.m in Sources */,
 				0AAACDC11D680E77007C3CCC /* ForgotPasswordViewController.swift in Sources */,
 				0A1A34061D67BB7A00EC75BA /* AppSetting.swift in Sources */,
+				0AFBAD311D6E7B7D0088B605 /* RelateVideoTableViewCell.swift in Sources */,
+				0ABE93891D70F7CC00EBACFB /* LandScapeVideoViewController.swift in Sources */,
 				0A1D63FF1D6AF30300C38C7E /* CategoryListTableViewCell.swift in Sources */,
 				0AAACDCF1D68D90A007C3CCC /* FilterCustomView.swift in Sources */,
 				0A1D64051D6AF33900C38C7E /* CategoryDetailTableViewCell.swift in Sources */,
+				0A3AA9851D6F7A0200F4DEC9 /* CommentHeaderView.swift in Sources */,
 				0A3FC5DD1D66849F006615BA /* TOActionSheet.m in Sources */,
+				0A4F693A1D6E3ECE002A74AF /* SuccessView.swift in Sources */,
 				0A1A34011D67A80200EC75BA /* TOCropOverlayView.m in Sources */,
+				0A4F69361D6E3DDD002A74AF /* KLCPopup.m in Sources */,
+				0A9DC3BD1D724A7400123681 /* UIScrollView+IBFloatingHeader.m in Sources */,
 				0A1A34021D67A80200EC75BA /* TOCropScrollView.m in Sources */,
 				0A3FC5A31D655AF0006615BA /* LoginViewController.swift in Sources */,
+				0AFBAD341D6EAEEE0088B605 /* VideoDetailHeaderView.swift in Sources */,
 				0AAACDE81D6A5F00007C3CCC /* UIScrollView+SVInfiniteScrolling.m in Sources */,
 				0A1D63FC1D6AF2ED00C38C7E /* CategoryDetailTableViewController.swift in Sources */,
 				0A1A33FF1D67A80200EC75BA /* UIImage+CropRotate.m in Sources */,
 				0A1A33FE1D67A80200EC75BA /* TOCropViewControllerTransitioning.m in Sources */,
+				0A1D64111D6BFDC500C38C7E /* CreatorDetailTableViewController.swift in Sources */,
 				0AAACDC31D6881D7007C3CCC /* ViewManager.swift in Sources */,
 				0A3FC5A71D655B34006615BA /* AppConstant.swift in Sources */,
 				0AAACDDD1D6945CF007C3CCC /* SWRevealViewController.m in Sources */,
 				0AAACDD11D68DA17007C3CCC /* FilterView.swift in Sources */,
+				0A3AA98E1D6F879E00F4DEC9 /* ResetPasswordViewController.swift in Sources */,
+				0A3364FA1D7537CF001AE324 /* MeetNewsTableViewCell.swift in Sources */,
 				0A2678621D64AE5900DCB621 /* AppDelegate.swift in Sources */,
+				0A9DC3C01D72703F00123681 /* CreatorProfileTableViewCell.swift in Sources */,
 				0AAACDE11D696C1B007C3CCC /* VideoModel.swift in Sources */,
 				0AAACDC91D688472007C3CCC /* RegisterHomeViewController.swift in Sources */,
 				0A3FC5C11D65D31F006615BA /* UserModel.swift in Sources */,
 				0AAACDEB1D6A92BF007C3CCC /* CreatorModel.swift in Sources */,
 				0A3FC5A51D655B11006615BA /* MainViewController.swift in Sources */,
 				0A1A34031D67A80200EC75BA /* TOCropToolbar.m in Sources */,
+				0A3364F71D753787001AE324 /* MeetNewsTableViewController.swift in Sources */,
+				0A3365011D7569B8001AE324 /* NotificationTableViewCell.swift in Sources */,
 				0A3FC5BD1D65CBAF006615BA /* ResponseBuilder.swift in Sources */,
+				0A4F69321D6D663A002A74AF /* SearchViewController.swift in Sources */,
 				0A1D63FA1D6AF2DD00C38C7E /* CategoryListTableViewController.swift in Sources */,
+				0A3AA9821D6F783B00F4DEC9 /* CommentTableViewCell.swift in Sources */,
+				0A3AA9921D6F941100F4DEC9 /* UpdateProfileHomeViewController.swift in Sources */,
 				0AAACDDF1D6947DF007C3CCC /* MenuTableViewController.swift in Sources */,
 				0AAACDCB1D68CDF6007C3CCC /* DPSegmentedControl.swift in Sources */,
 				0A1A33FC1D67A80200EC75BA /* TOActivityCroppedImageProvider.m in Sources */,
 				0AAACDC71D688269007C3CCC /* RootNavViewController.swift in Sources */,
 				0AAACDD61D68EA00007C3CCC /* HomeTableViewCell.swift in Sources */,
+				0A4F692F1D6D5E7C002A74AF /* WebViewController.swift in Sources */,
 				0A1D64081D6B826200C38C7E /* CategoryModel.swift in Sources */,
 				0A3FC5A01D6559FB006615BA /* Utils.m in Sources */,
 			);
@@ -838,6 +1059,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Blasteem/View",
+				);
 				INFOPLIST_FILE = Blasteem/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -857,6 +1082,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Blasteem/View",
+				);
 				INFOPLIST_FILE = Blasteem/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

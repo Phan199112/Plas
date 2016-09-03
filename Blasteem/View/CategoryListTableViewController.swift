@@ -10,7 +10,7 @@ import UIKit
 
 class CategoryListTableViewController: UITableViewController {
 
-    var categoryArray:[String] = [String]()
+    var categoryArray:[CategoryModel] = [CategoryModel]()
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -33,6 +33,7 @@ class CategoryListTableViewController: UITableViewController {
                             if responseBuilder.isSuccessful!
                             {
                                 self.categoryArray = responseBuilder.getCategories()
+                                self.tableView.reloadData()
                             }else{
                                 
                             }
@@ -60,7 +61,7 @@ class CategoryListTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("categorylistCell", forIndexPath: indexPath) as? CategoryListTableViewCell
 
         // Configure the cell...
-        cell!.titleLabel.text = categoryArray[indexPath.row]
+        cell!.titleLabel.text = categoryArray[indexPath.row].category_title
         return cell!
     }
     
@@ -69,7 +70,14 @@ class CategoryListTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
+        let viewCtrl = self.storyboard?.instantiateViewControllerWithIdentifier("CategoryDetailTableViewController") as? CategoryDetailTableViewController
+        AppSetting.setNone()
+        let category = self.categoryArray[indexPath.row]
+        viewCtrl?.category_id = category.category_id!
+        self.navigationController?.pushViewController(viewCtrl!, animated: true)
+    }
+    override func shouldAutorotate() -> Bool {
+        return false
     }
 
     /*

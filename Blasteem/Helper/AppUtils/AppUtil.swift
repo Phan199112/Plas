@@ -9,27 +9,55 @@
 import Foundation
 import ZProgressHUD
 import SVProgressHUD
-
+import KVNProgress
 class AppUtil {
     
     class func showLoadingHud()
     {
-//        ProgressHUD .show("", interaction: false)
         SVProgressHUD.setDefaultStyle(.Custom)
         SVProgressHUD.setBackgroundColor(UIColor(red: 0, green: 0, blue: 0, alpha: 0.6))
         SVProgressHUD.setForegroundColor(mainColor)
         
         SVProgressHUD.show()
+//        [KVNProgress showWithStatus:@"Loading"
+//        onView:view];
+        
     }
     
+    class func showLoadingHudOnView(view:UIView) {
+        
+        let configuration:KVNProgressConfiguration = KVNProgressConfiguration()
+        configuration.circleStrokeForegroundColor = UIColor.whiteColor()
+        
+        
+        configuration.backgroundFillColor = UIColor.blackColor()
+        configuration.circleSize = 60.0
+        configuration.lineWidth = 1.0
+        KVNProgress.setConfiguration(configuration)
+        KVNProgress.showWithStatus("", onView: view)
+    }
+    
+    class func dismissLoadingHud(view:UIView) {
+        KVNProgress.dismiss()
+        
+    }
     class func showErrorMessage(message:String)
     {
-        ProgressHUD.showError(message)
+        let errorView = NSBundle.mainBundle().loadNibNamed("ErrorView", owner: nil, options: nil)[0] as? ErrorView
+        errorView?.messageLabel.text = message
+        errorView?.frame = CGRectMake(0, 0, ScreenSize.SCREEN_WIDTH - 80, 250)
+        errorView?.imageView.image = UIImage(named: "close_button")
+        let popup = KLCPopup(contentView: errorView, showType: .BounceInFromTop, dismissType: .FadeOut, maskType: .Dimmed, dismissOnBackgroundTouch: true, dismissOnContentTouch: false)
+        popup.showWithDuration(2.0)
     }
     
-    class func showSuccess(message:String)
+    class func showSuccessMessage(message:String)
     {
-        ProgressHUD.showSuccess(message)
+        let errorView = NSBundle.mainBundle().loadNibNamed("ErrorView", owner: nil, options: nil)[0] as? ErrorView
+        errorView?.imageView.image = UIImage(named: "valid")
+        errorView?.messageLabel.text = message
+        let popup = KLCPopup(contentView: errorView, showType: .BounceInFromTop, dismissType: .FadeOut, maskType: .Dimmed, dismissOnBackgroundTouch: true, dismissOnContentTouch: false)
+        popup.showWithDuration(2.0)
     }
     
     class func disappearLoadingHud() {
@@ -43,5 +71,17 @@ class AppUtil {
                 Int64(delay * Double(NSEC_PER_SEC))
             ),
             dispatch_get_main_queue(), closure)
+    }
+    
+    
+    class func getStringFromInt(integer:Int) -> String {
+        if integer < 1000 {
+            return String(integer)
+        }else{
+            let x = Double(integer) / 1000.0
+            let y = Double(round(x * 10) / 10)
+            return "\(y)k"
+        }
+        
     }
 }

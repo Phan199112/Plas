@@ -43,7 +43,8 @@ class FilterView: UIView {
         super.init(frame: frame)
         self.backgroundColor = mainColor
         
-        imageView.frame = CGRectMake((frame.size.width - 20) / 2, 12, 20, 20)
+        imageView.frame = CGRectMake((frame.size.width - 20) / 2, 14, 20, 20)
+        imageView.contentMode = .ScaleAspectFit
         label.frame = CGRectMake(0, 40, frame.size.width, 20)
         label.textAlignment = .Center
         label.font = AppFont.OpenSans_12

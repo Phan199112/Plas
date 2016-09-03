@@ -8,7 +8,7 @@
 
 import UIKit
 
-enum SlideMenu {
+enum SlideMenu:String {
     case Profile
     case Creators
     case Meet
@@ -23,8 +23,9 @@ enum SlideMenu {
     }
     static var currentMenu : SlideMenu?
 }
-class MenuTableViewController: UITableViewController {
 
+class MenuTableViewController: UITableViewController {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -34,6 +35,7 @@ class MenuTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         self.tableView.backgroundView = UIImageView(image: UIImage(named: "LOGIN-BG"))
+        self.tableView.scrollEnabled = false
     }
 
     override func didReceiveMemoryWarning() {
@@ -42,14 +44,21 @@ class MenuTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if DeviceType.IS_IPHONE_4_OR_LESS {
+            return 50
+        }
         return 60.0
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        SlideMenu.currentMenu = SlideMenu.getAllMenus()[indexPath.row]
-        self.performSegueWithIdentifier("segue_push", sender: nil)
+        self.revealViewController().revealToggleAnimated(true)
+        
+        NSNotificationCenter.defaultCenter().postNotificationName("SlideMenuNotification", object: nil,userInfo: ["menu":SlideMenu.getAllMenus()[indexPath.row].rawValue])
         
     }
 
- 
+    override func shouldAutorotate() -> Bool {
+        return false
+    }
+
 }

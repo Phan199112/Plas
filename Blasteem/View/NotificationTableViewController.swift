@@ -10,6 +10,7 @@ import UIKit
 
 class NotificationTableViewController: UITableViewController {
 
+    var notificationArray:[VideoModel] = []
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -18,35 +19,41 @@ class NotificationTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        self.tableView.registerNib(UINib(nibName: "NotificationTableViewCell",bundle: nil), forCellReuseIdentifier: "notificationCell")
+        self.notificationArray = AppSetting.notification_arr
+        self.loadData()
     }
 
+    func loadData() {
+        
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
 
-    // MARK: - Table view data source
-
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
-
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return notificationArray.count
     }
 
-    /*
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
-
+        let cell = tableView.dequeueReusableCellWithIdentifier("notificationCell", forIndexPath: indexPath) as? NotificationTableViewCell
+        cell?.notification = notificationArray[indexPath.row]
         // Configure the cell...
-
-        return cell
+        
+        return cell!
     }
-    */
-
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        ViewManager.sharedInstance.showVideoPage(self.notificationArray[indexPath.row], homeVC: nil, creatorVC: nil)
+    }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 70
+    }
     /*
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {

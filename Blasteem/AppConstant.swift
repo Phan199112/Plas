@@ -11,25 +11,36 @@ import Foundation
 let mainColor = UIColor(red:0.05, green:0.94, blue:0.85, alpha:1.0)
 
 //User Defaults Constants
+let ApplicationDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
 let APP_TOKEN = "app_token"
 let IS_LOGIN = "is_login"
 let Current_User = "currentUser"
+let Current_User_ID = "currentUserId"
 struct AppCredential {
     static let API_UNAME = "apiuser"
     static let API_PWD = "SJmPgYR!2LFkrB%dx65cYT8C"
     
     static let CLIENT_ID = "5CXEOvasCDNRyeDHJmfmw3Y4YXGad4"
     static let CLIENT_SECRET = "7iG4WvA7XcLL3jZG1J3h5zk4Ej1ktf"
-    
+    static let NOTIFICATION_TOKEN = "APA91bG-399h-qD_OFTwxjbzWaKYeWMSTjNrH_qnjxGZqpaPbJpFB8sKV27BsSSza6KoIUm3JDERMSmrmcK73sCmJ5XvenVxczQrV72AtMORE8WMtLbTUHY"
     
 }
 
 struct ApiUrl {
     
     static let BASEURL = "https://blasteem.stringsoftware.space/"
+    static let NEWS = "news/"
+    static let MEET = "meet/"
+    static let FACTORY = "e-la-factory/"
+    static let ABOUTUS = "about-us/"
+    static let FAQ = "faq/"
+    
     static let LOGIN = "login"
     static let CREATETOKEN = "oauth/token"
     static let REGISTER = "wp-json/wp/v2/users/register"
+    static let UPDATE_PROFILE = "wp-json/wp/v2/users/update_user_profile"
+    static let GET_USER_PROFILE = "wp-json/wp/v2/users/get_user_profile"
+    
     static let REGISTER_FB = "wp-json/wp/v2/users/facebook-register"
     static let REGISTER_GOOGLE = "wp-json/wp/v2/users/google-register"
     static let VALIDATE_FB = "wp-json/wp/v2/users/validate-facebook-user"
@@ -37,8 +48,25 @@ struct ApiUrl {
     static let VALIDATE_USER = "wp-json/wp/v2/users/validate-wpuser-credentials"
     static let GET_ME = "wp-json/wp/v2/users/"
     static let RESET_PASSWORD = "wp-json/wp/v2/users/resetpassword"
-    static let GET_VIDEO_LIST = "wp-json/wp/v2/videos/get-video-list"
+    static let GET_VIDEO_LIST = "wp-json/wp/v2/videos/get-video-list/"
+    static let GET_NEWS_LIST = "wp-json/wp/v2/videos/get_news/"
+    static let GET_MEETS_LIST = "wp-json/wp/v2/videos/get_meets/"
+    static let GET_SINGLE_VIDEO_INFO = "wp-json/wp/v2/videos/get-blasteem-video-info/"
     static let GET_CATEGORIES = "wp-json/wp/v2/videos/get_categories"
+    static let GET_CREATORS = "wp-json/wp/v2/videos/get_creators"
+    static let GET_CREATOR_INFO = "wp-json/wp/v2/creator/get_creator_info"
+    static let VALIDATE_FOLLOW_CREATOR = "wp-json/wp/v2/videos/validate_creator_follow"
+    static let FOLLOW_AUTHOR = "wp-json/wp/v2/videos/follow-author"
+    static let GET_SUBSCRIPTIONS = "wp-json/wp/v2/videos/get_subscriptions"
+    
+    static let GET_COMMENTS = "wp-json/wp/v2/videos/get_comments"
+    
+    static let ADD_COMMENTS = "wp-json/wp/v2/videos/add_comment"
+    
+    static let BLAST_VIDEO = "wp-json/wp/v2/videos/blast-it"
+    static let GET_NOTIFICATIONS = "pnfw/posts/"
+    static let GET_TERMS = "wp-json/wp/v2/users/get_terms_and_conditions"
+    
 }
 
 struct AppFont {
@@ -46,6 +74,7 @@ struct AppFont {
     static let OpenSans_12 = UIFont(name: "OpenSans", size: 12)
     static let OpenSans_13 = UIFont(name: "OpenSans", size: 13)
     static let OpenSans_14 = UIFont(name: "OpenSans", size: 14)
+    static let OpenSans_15 = UIFont(name: "OpenSans", size: 15)
     static let OpenSans_16 = UIFont(name: "OpenSans", size: 16)
     static let OpenSans_18 = UIFont(name: "OpenSans", size: 18)
 }

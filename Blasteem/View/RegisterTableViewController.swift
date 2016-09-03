@@ -8,8 +8,9 @@
 
 import UIKit
 
-class RegisterTableViewController: UITableViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIPickerViewDelegate,UIPickerViewDataSource,TOCropViewControllerDelegate{
+class RegisterTableViewController: UITableViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIPickerViewDelegate,UIPickerViewDataSource,TOCropViewControllerDelegate, UITextFieldDelegate{
 
+    var homeVC:RegisterHomeViewController?
     @IBOutlet weak var avatarView: UIView!
     
     @IBOutlet weak var avatarImageView: UIImageView!
@@ -23,7 +24,8 @@ class RegisterTableViewController: UITableViewController,UIImagePickerController
     @IBOutlet weak var ageView: UIView!
     @IBOutlet weak var ageField: UITextField!
     
-    @IBOutlet weak var sexView: UITextField!
+    
+    @IBOutlet weak var sexView: UIView!
     @IBOutlet weak var sexField: UITextField!
     
     @IBOutlet weak var addressView: UIView!
@@ -41,9 +43,10 @@ class RegisterTableViewController: UITableViewController,UIImagePickerController
     @IBOutlet weak var confirmPassView: UIView!
     @IBOutlet weak var confirmPassField: UITextField!
     
+    @IBOutlet weak var termsCheckImage: UIImageView!
     @IBOutlet weak var termsCheckButton: UIButton!
     
-    @IBOutlet weak var subscriptionCheckButton: UIButton!
+    @IBOutlet weak var subscriptionCheckImage: UIImageView!
     
     @IBOutlet weak var registerButton: UIButton!
     
@@ -137,6 +140,30 @@ class RegisterTableViewController: UITableViewController,UIImagePickerController
         }
     }
     
+    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+        if textField == self.sexField {
+        
+            self.homeVC?.pickerType = "gender"
+            self.homeVC?.showPickerView()
+            return false
+        }
+        
+        if textField == self.ageField {
+            self.homeVC?.pickerType = "birthday"
+            self.homeVC?.showPickerView()
+            
+            return false
+        }
+        
+        if textField == self.addressField {
+            self.homeVC?.pickerType = "country"
+            self.homeVC?.showPickerView()
+            
+            return false
+        }
+        return true
+        
+    }
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         switch pickerView {
         case sexPicker:
@@ -156,17 +183,15 @@ class RegisterTableViewController: UITableViewController,UIImagePickerController
     //handle Check Buttons
     func handleCheckBox() {
         if isAgreedNews {
-            subscriptionCheckButton.setBackgroundImage(UIImage(named: "Checkbox"), forState: .Normal)
+            subscriptionCheckImage.hidden = false
             
         }else{
-            subscriptionCheckButton.setBackgroundImage(UIImage(named: "Unchecked"), forState: .Normal)
-
+            subscriptionCheckImage.hidden = true
         }
         if isAgreedTerms {
-            termsCheckButton.setBackgroundImage(UIImage(named: "Checkbox"), forState: .Normal)
+            termsCheckImage.hidden = false
         }else{
-            termsCheckButton.setBackgroundImage(UIImage(named: "Unchecked"), forState: .Normal)
-
+            termsCheckImage.hidden = true
         }
     }
     
@@ -188,7 +213,7 @@ class RegisterTableViewController: UITableViewController,UIImagePickerController
         self.handleCheckBox()
     }
     @IBAction func onRegister(sender: AnyObject) {
-
+        self.view.endEditing(true)
         //Validation Check
         if !Utils.checkIfStringContainsText(nameField.text) {
             AppUtil.showErrorMessage("Nome richiesto")
@@ -253,7 +278,7 @@ class RegisterTableViewController: UITableViewController,UIImagePickerController
         if sexField.text == sex_arr[1] {
             gender = "F"
         }
-        var isNews = "N"
+        var isNews:String = "N"
         if isAgreedNews {
             isNews = "Y"
         }
@@ -270,7 +295,7 @@ class RegisterTableViewController: UITableViewController,UIImagePickerController
         request.addParameterWithKey("blasteem_data_di_nascita", value: ageField.text!)
         
         var imageData:NSData?
-       
+        
         request.addParameterWithKey("mailchimp_subscribe", value: isNews)
         
         if currentUser != nil {
@@ -278,7 +303,7 @@ class RegisterTableViewController: UITableViewController,UIImagePickerController
                 request.addParameterWithKey("id", value: (currentUser?.fb_id)!)
                 request.url = ApiUrl.REGISTER_FB
                 if currentUser?.avatar_url != nil {
-                    request.addParameterWithKey("image-url", value: (currentUser?.avatar_url)!)
+                    request.addParameterWithKey("profilepicture", value: (currentUser?.avatar_url)!)
                 }
             }
             
@@ -304,6 +329,7 @@ class RegisterTableViewController: UITableViewController,UIImagePickerController
                 if self.currentUser == nil
                 {
                     self.currentUser = UserModel(user_id: nil, fb_id: nil, google_id: nil, avatar_url: nil, avatar_data:imageData, firstname: self.nameField.text, lastname: self.lastnameField.text, birthdate: NSDate(fromString: self.ageField.text, withFormat: "dd-MM-yyyy"), sex: self.sexField.text, address: self.addressField.text, email: self.emailField.text, username: self.usernameField.text, password: self.passwordField.text, user_link:nil)
+                    
                 } else{
                     self.currentUser?.firstname = self.nameField.text
                     self.currentUser?.lastname = self.lastnameField.text
@@ -315,7 +341,10 @@ class RegisterTableViewController: UITableViewController,UIImagePickerController
                     self.currentUser?.password = self.passwordField.text
                     
                 }
+                self.currentUser?.is_agreed_news = self.isAgreedNews
+                ApplicationDelegate.restClient?.linkWithUrl(ApiUrl.BASEURL + "pnfw/register/", andEmail: (self.currentUser?.email)!)
                 responseBuilder.registerResponseHandler(self.currentUser!)
+                
             }else{
                 AppUtil.showErrorMessage(responseBuilder.reason!)
             }
@@ -325,48 +354,32 @@ class RegisterTableViewController: UITableViewController,UIImagePickerController
         }
         
     }
-
+    override func scrollViewDidScroll(scrollView: UIScrollView) {
+        
+        print(self.tableView.contentOffset.y)
+        if self.tableView.contentOffset.y > 10 {
+            self.homeVC?.shadowImageView.hidden = false
+        }else{
+            self.homeVC?.shadowImageView.hidden = true
+        }
+    }
+    
+    
     @IBAction func onChangeAvatar(sender: AnyObject) {
         self.view.endEditing(true)
         
         if currentUser != nil {
             return
         }
-        let actionsheet = TOActionSheet()
-        actionsheet.buttonBackgroundColor = mainColor
-        actionsheet.buttonTextColor = UIColor.whiteColor()
-        actionsheet.cancelButtonBackgroundColor = UIColor.whiteColor()
-        actionsheet.cancelButtonTextColor = UIColor.blackColor()
-        actionsheet.buttonFont = AppFont.OpenSans_16
-        actionsheet.cancelButtonFont = AppFont.OpenSans_16
-        actionsheet.dimmingViewAlpha = 0.8
-        actionsheet.addButtonWithTitle("From Camera") {
-            let imagePicker = UIImagePickerController()
-            imagePicker.sourceType = .Camera
-            
-            imagePicker.delegate = self
-            self.presentViewController(imagePicker, animated: true, completion: nil)
-        }
-        actionsheet.addButtonWithTitle("From Library") {
-            let imagePicker = UIImagePickerController()
-            imagePicker.sourceType = .PhotoLibrary
-            imagePicker.delegate = self
-            self.presentViewController(imagePicker, animated: true, completion: nil)
-        }
-        actionsheet.showFromView(sender as? UIButton, inView: self.view)
+        self.homeVC?.pickerType = "image"
+        self.homeVC?.showPickerView()
     }
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         
-        let cropController = TOCropViewController(croppingStyle: .Default, image: (info[UIImagePickerControllerOriginalImage] as? UIImage)!)
-        cropController.delegate = self
-        
-//        [picker dismissViewControllerAnimated:YES completion:^{
-//            [self presentViewController:cropController animated:YES completion:nil];
-//            }];
-        picker.dismissViewControllerAnimated(true) { 
-            self.presentViewController(cropController, animated: true, completion: nil)
-        }
+        currentUser?.avatar_data = UIImageJPEGRepresentation(info[UIImagePickerControllerEditedImage] as! UIImage, 0.5)
+        self.avatarImageView.image = info[UIImagePickerControllerEditedImage] as? UIImage
+        picker.dismissViewControllerAnimated(true, completion: nil)
     }
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
@@ -381,4 +394,30 @@ class RegisterTableViewController: UITableViewController,UIImagePickerController
         self.avatarImageView.image = image
         
     }
+    @IBAction func onGetTerms(sender: AnyObject) {
+        self.view.endEditing(true)
+        let request = RequestBuilder()
+        request.url = ApiUrl.GET_TERMS
+        AppUtil.showLoadingHud()
+        ComManager().postRequestToServer(request, successHandler: { (responseBuilder) in
+            AppUtil.disappearLoadingHud()
+            if responseBuilder.isSuccessful!
+            {
+                let terms = responseBuilder.response!["terms_and_conditions"] as! String
+                self.homeVC?.pickerType = "terms"
+                self.homeVC?.showPickerView()
+                
+                self.homeVC?.termsWebView.loadHTMLString(terms, baseURL: nil)
+            }else{
+                AppUtil.showErrorMessage(responseBuilder.reason!)
+            }
+            }) { (error) in
+            AppUtil.disappearLoadingHud()
+        }
+    }
+    
+    override func shouldAutorotate() -> Bool {
+        return false
+    }
+
 }

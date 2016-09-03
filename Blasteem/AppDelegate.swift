@@ -12,15 +12,16 @@ import FBSDKShareKit
 import FBSDKLoginKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate,DSRestClientDelegate {
 
     var window: UIWindow?
-   
+    var restClient:DSRestClient?
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         //FaceBook Signin
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
+        UIApplication.sharedApplication().applicationIconBadgeNumber = 0
         //Google Signin
         var configureError: NSError?
         GGLContext.sharedInstance().configureWithError(&configureError)
@@ -28,9 +29,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ViewManager.sharedInstance.window = self.window
         ViewManager.sharedInstance.setRootVC()
         
+        let notificationSettings = UIUserNotificationSettings(
+            forTypes: [.Badge, .Sound, .Alert], categories: nil)
+        application.registerUserNotificationSettings(notificationSettings)
+        UIApplication.sharedApplication().registerForRemoteNotifications()
         return true
     }
     
+    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+        self.restClient = DSRestClient(key: AppCredential.CLIENT_ID, andSecret: AppCredential.CLIENT_SECRET)
+        self.restClient?.delegate = self
+        
+        self.restClient?.registerWithUrl(ApiUrl.BASEURL + "pnfw/register/", andToken: deviceToken)
+        
+        let characterSet: NSCharacterSet = NSCharacterSet(charactersInString: "<>")
+        
+        let deviceTokenString: String = (deviceToken.description as NSString)
+            .stringByTrimmingCharactersInSet(characterSet)
+            .stringByReplacingOccurrencesOfString( " ", withString: "") as String
+        USER_DEFAULTS.setObject(deviceTokenString, forKey: "device_token")
+        
+        
+    }
+    
+    func restClientRegistered(client: DSRestClient!) {
+        
+    }
+    
+    func restClient(client: DSRestClient!, registerFailedWithError error: NSError!) {
+        
+    }
+    
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+
+        NSNotificationCenter.defaultCenter().postNotificationName("RemoteNotification", object: nil)
+    }
+
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
         
         return FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation) || GIDSignIn.sharedInstance().handleURL(url,

@@ -26,6 +26,7 @@ class LoginViewController: UIViewController ,GIDSignInDelegate ,GIDSignInUIDeleg
     @IBOutlet weak var passwordField: UITextField!
     
     //Constraints
+    @IBOutlet weak var constraintsbetweenlogoandview: NSLayoutConstraint!
     @IBOutlet weak var intervalConstraints: NSLayoutConstraint!
     @IBOutlet weak var topConstraint: NSLayoutConstraint!
     override func viewDidLoad() {
@@ -46,10 +47,12 @@ class LoginViewController: UIViewController ,GIDSignInDelegate ,GIDSignInUIDeleg
             topConstraint.constant = -135
             intervalConstraints.constant = 30
         }else if DeviceType.IS_IPHONE_6{
-            topConstraint.constant = -135
+            topConstraint.constant = -150
             intervalConstraints.constant = 48
+            constraintsbetweenlogoandview.constant = 50
         }else{
             intervalConstraints.constant = 60
+            constraintsbetweenlogoandview.constant = 70
         }
         
     }
@@ -68,6 +71,7 @@ class LoginViewController: UIViewController ,GIDSignInDelegate ,GIDSignInUIDeleg
     }
     
     @IBAction func onLogin(sender: AnyObject) {
+        self.view.endEditing(true)
         if !Utils.checkIfStringContainsText(usernameField.text){
             AppUtil.showErrorMessage("Username richiesta")
             return
@@ -87,21 +91,27 @@ class LoginViewController: UIViewController ,GIDSignInDelegate ,GIDSignInUIDeleg
             
                             if responseBuilder.isSuccessful!
                             {
-                                
-                                //Go To Home Page
+                                AppSetting.current_user_id = responseBuilder.loginResponseHandler()
                                 let request1 = RequestBuilder()
-                                request1.url = ApiUrl.GET_ME + String(responseBuilder.loginResponseHandler())
                                 
-                                ComManager().getRequestToServer(request1, successHandler: { (responseBuilder) in
+                                request1.url = ApiUrl.GET_USER_PROFILE
+                                request1.addParameterWithKey("userid", value: String((AppSetting.current_user_id)!))
+                                AppUtil.showLoadingHud()
+                                ComManager().postRequestToServer(request1, successHandler: { (responseBuilder) in
+                                    if responseBuilder.isSuccessful!{
+                                        AppSetting.currentUser = responseBuilder.getUserInfo()
+                                        ApplicationDelegate.restClient?.linkWithUrl(ApiUrl.BASEURL + "pnfw/register/", andEmail: (AppSetting.currentUser?.email)!)
+                                        
+                                        self.performSegueWithIdentifier("segue_login_home", sender: nil)
+                                        
+                                    }else{
+                                        AppUtil.showErrorMessage(responseBuilder.reason!)
+                                    }
                                     AppUtil.disappearLoadingHud()
-                                    
-                                    responseBuilder.getUserInfo()
-                                    
-                                    self.performSegueWithIdentifier("segue_login_home", sender: nil)
-                                    
                                     }, errorHandler: { (error) in
                                         AppUtil.disappearLoadingHud()
                                 })
+                                //Go To Home Page
                                 
                             }else{
                                 AppUtil.disappearLoadingHud()
@@ -151,25 +161,48 @@ class LoginViewController: UIViewController ,GIDSignInDelegate ,GIDSignInUIDeleg
                             AppUtil.disappearLoadingHud()
                             if responseBuilder.isSuccessful!
                             {
-                                //Go To Home Page
-                                let request1 = RequestBuilder()
-                                request1.url = ApiUrl.GET_ME + String(responseBuilder.loginResponseHandler())
-                                
-                                ComManager().getRequestToServer(request1, successHandler: { (responseBuilder) in
-                                    AppUtil.disappearLoadingHud()
-                                    if responseBuilder.isSuccessful!
-                                    {
-                                        responseBuilder.getUserInfo()
-                                        self.performSegueWithIdentifier("segue_login_home", sender: nil)
-                                    }else{
-                                        AppUtil.showErrorMessage(responseBuilder.reason!)
-                                    }
+                                if responseBuilder.validateSocialUser(){
+                                    let request1 = RequestBuilder()
                                     
-                                    }, errorHandler: { (error) in
+                                    request1.url = ApiUrl.GET_USER_PROFILE
+                                    request1.addParameterWithKey("userid", value: String((AppSetting.current_user_id)!))
+                                    AppUtil.showLoadingHud()
+                                    ComManager().postRequestToServer(request1, successHandler: { (responseBuilder) in
+                                        if responseBuilder.isSuccessful!{
+                                            AppSetting.currentUser = responseBuilder.getUserInfo()
+                                            ApplicationDelegate.restClient?.linkWithUrl(ApiUrl.BASEURL + "pnfw/register/", andEmail: (AppSetting.currentUser?.email)!)
+                                            
+                                            self.performSegueWithIdentifier("segue_login_home", sender: nil)
+                                            
+                                        }else{
+                                            AppUtil.showErrorMessage(responseBuilder.reason!)
+                                        }
                                         AppUtil.disappearLoadingHud()
-                                })
+                                        }, errorHandler: { (error) in
+                                            AppUtil.disappearLoadingHud()
+                                    })
+
+                                }else{
+                                    self.performSegueWithIdentifier("segue_login_register", sender: currentUser)
+                                }
+                                
+//                                //Go To Home Page
+//                                let request1 = RequestBuilder()
+//                                request1.url = ApiUrl.GET_ME + String(responseBuilder.loginResponseHandler())
+//                                
+//                                ComManager().getRequestToServer(request1, successHandler: { (responseBuilder) in
+//                                    AppUtil.disappearLoadingHud()
+//                                    
+//                                    
+//                                    responseBuilder.getUserInfo()
+//                                    
+//                                    self.performSegueWithIdentifier("segue_login_home", sender: nil)
+//                                    
+//                                    }, errorHandler: { (error) in
+//                                        AppUtil.disappearLoadingHud()
+//                                })
                             }else{
-                                self.performSegueWithIdentifier("segue_login_register", sender: currentUser)
+                                AppUtil.showErrorMessage(responseBuilder.reason!)
                             }
                             }, errorHandler: { (error) in
                             AppUtil.disappearLoadingHud()
@@ -224,20 +257,22 @@ class LoginViewController: UIViewController ,GIDSignInDelegate ,GIDSignInUIDeleg
                 {
                     if responseBuilder.validateSocialUser()
                     {
-                        //Go To Home Page
                         let request1 = RequestBuilder()
-                        request1.url = ApiUrl.GET_ME + String(responseBuilder.loginResponseHandler())
                         
-                        ComManager().getRequestToServer(request1, successHandler: { (responseBuilder) in
-                            AppUtil.disappearLoadingHud()
-                            if responseBuilder.isSuccessful!
-                            {
-                                responseBuilder.getUserInfo()
+                        request1.url = ApiUrl.GET_USER_PROFILE
+                        request1.addParameterWithKey("userid", value: String((AppSetting.current_user_id)!))
+                        AppUtil.showLoadingHud()
+                        ComManager().postRequestToServer(request1, successHandler: { (responseBuilder) in
+                            if responseBuilder.isSuccessful!{
+                                AppSetting.currentUser = responseBuilder.getUserInfo()
+                                ApplicationDelegate.restClient?.linkWithUrl(ApiUrl.BASEURL + "pnfw/register/", andEmail: (AppSetting.currentUser?.email)!)
+                                
                                 self.performSegueWithIdentifier("segue_login_home", sender: nil)
+                                
                             }else{
                                 AppUtil.showErrorMessage(responseBuilder.reason!)
                             }
-                            
+                            AppUtil.disappearLoadingHud()
                             }, errorHandler: { (error) in
                                 AppUtil.disappearLoadingHud()
                         })
@@ -279,5 +314,8 @@ class LoginViewController: UIViewController ,GIDSignInDelegate ,GIDSignInUIDeleg
         }
     }
     
+    override func shouldAutorotate() -> Bool {
+        return false
+    }
 
 }

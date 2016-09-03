@@ -10,6 +10,7 @@ import UIKit
 
 class RootNavViewController: UINavigationController {
 
+    var isLandScape:Bool = false
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -32,5 +33,20 @@ class RootNavViewController: UINavigationController {
         // Pass the selected object to the new view controller.
     }
     */
+    override func shouldAutorotate() -> Bool {
+        return isLandScape
+    }
+    //     override func shouldAutorotateToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation) -> Bool {
+    //        return UIInterfaceOrientationIsPortrait(interfaceOrientation)
+    //    }
+    
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        if isLandScape {
+            return UIInterfaceOrientationMask.All
+        }else{
+            return UIInterfaceOrientationMask.Portrait
+        }
+        
+    }
 
 }

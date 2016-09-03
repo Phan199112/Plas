@@ -37,9 +37,9 @@ class FilterCustomView: UIView {
         super.init(frame: frame)
         self.backgroundColor = mainColor
         
-        new_view = FilterView(frame:CGRectMake(0, 0, frame.width / 3.0, frame.height - 1))
-        visit_view = FilterView(frame:CGRectMake(frame.width / 3.0, 0, frame.width / 3.0, frame.height - 1))
-        top_view = FilterView(frame:CGRectMake(frame.width / 3.0 * 2.0, 0, frame.width / 3.0, frame.height - 1))
+        new_view = FilterView(frame:CGRectMake(0, 4, frame.width / 3.0, frame.height - 5))
+        visit_view = FilterView(frame:CGRectMake(frame.width / 3.0, 4, frame.width / 3.0, frame.height - 5))
+        top_view = FilterView(frame:CGRectMake(frame.width / 3.0 * 2.0, 4, frame.width / 3.0, frame.height - 5))
         
         let new_button = UIButton(frame:CGRectMake(0, 0, frame.width / 3.0, frame.height - 1))
         let visit_button = UIButton(frame:CGRectMake(frame.width / 3.0, 0, frame.width / 3.0, frame.height - 1))
@@ -49,9 +49,9 @@ class FilterCustomView: UIView {
         top_button.addTarget(self, action: #selector(FilterCustomView.onTappedTop(_:)), forControlEvents: UIControlEvents.TouchDown)
         
         new_view!.image_name = "home_ic_filter_news"
-        new_view!.title = "News"
+        new_view!.title = "NEWS"
         
-        visit_view!.image_name = "home_ic_filter_view"
+        visit_view!.image_name = "home_ic_tab_eye"
         visit_view!.title = "PIU VISTI"
         
         top_view!.image_name = "home_ic_filter_topblasted"

@@ -8,12 +8,25 @@
 
 import UIKit
 
-class WebViewController: UIViewController {
+class WebViewController: UIViewController,UIWebViewDelegate {
 
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var webview: UIWebView!
+    var url:String?
+    var post_title:String?
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.webview.delegate = self
+        self.webview.loadRequest(NSURLRequest(URL: NSURL(string: url!)!))
+        self.titleLabel.text = post_title
+        AppUtil.showLoadingHud()
+    }
+    @IBAction func onBack(sender: AnyObject) {
+        self.navigationController?.popViewControllerAnimated(false)
     }
 
     override func didReceiveMemoryWarning() {
@@ -21,7 +34,9 @@ class WebViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    func webViewDidFinishLoad(webView: UIWebView) {
+        AppUtil.disappearLoadingHud()
+    }
     /*
     // MARK: - Navigation
 
@@ -31,5 +46,8 @@ class WebViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    override func shouldAutorotate() -> Bool {
+        return false
+    }
 
 }

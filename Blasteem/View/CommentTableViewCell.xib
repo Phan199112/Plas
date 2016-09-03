@@ -1,18 +1,78 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="OpenSans-Regular.ttf">
+            <string>OpenSans</string>
+            <string>OpenSans</string>
+        </mutableArray>
+        <mutableArray key="OpenSans-Semibold.ttf">
+            <string>OpenSans-Semibold</string>
+        </mutableArray>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="CommentTableViewCell" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="commentCell" rowHeight="139" id="KGk-i7-Jjw" customClass="CommentTableViewCell" customModule="Blasteem" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="139"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="138.5"/>
                 <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Wph-bM-CkY">
+                        <rect key="frame" x="8" y="8" width="28" height="28"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="28" id="Dpe-qx-z8g"/>
+                            <constraint firstAttribute="height" constant="28" id="edR-Ul-TVN"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8ki-pd-Kfr">
+                        <rect key="frame" x="44" y="11" width="39.5" height="21"/>
+                        <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="15"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UmB-ft-KU9">
+                        <rect key="frame" x="254" y="97" width="58" height="33"/>
+                        <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="15"/>
+                        <state key="normal" title="rispondi">
+                            <color key="titleColor" red="0.047058823530000002" green="0.94117647059999998" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                        <connections>
+                            <action selector="onRespond:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Syq-YZ-sii"/>
+                        </connections>
+                    </button>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="B8p-em-AJC">
+                        <rect key="frame" x="8" y="40" width="304" height="66"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="15"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    </textView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottomMargin" secondItem="B8p-em-AJC" secondAttribute="bottom" constant="24.5" id="7NU-yh-d0N"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="UmB-ft-KU9" secondAttribute="bottom" id="7jm-F9-JQQ"/>
+                    <constraint firstItem="Wph-bM-CkY" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="9Tj-44-8Wh"/>
+                    <constraint firstItem="UmB-ft-KU9" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="bqd-Ry-KkP"/>
+                    <constraint firstItem="B8p-em-AJC" firstAttribute="top" secondItem="Wph-bM-CkY" secondAttribute="bottom" constant="4" id="hla-IJ-CHv"/>
+                    <constraint firstItem="8ki-pd-Kfr" firstAttribute="centerY" secondItem="Wph-bM-CkY" secondAttribute="centerY" id="mBz-fa-pWk"/>
+                    <constraint firstItem="Wph-bM-CkY" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="pjn-Ye-noH"/>
+                    <constraint firstItem="B8p-em-AJC" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="qjz-vq-aqr"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="B8p-em-AJC" secondAttribute="trailing" id="vvD-HC-9I5"/>
+                    <constraint firstItem="8ki-pd-Kfr" firstAttribute="leading" secondItem="Wph-bM-CkY" secondAttribute="trailing" constant="8" id="yDB-rg-MVy"/>
+                </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="avatarImageView" destination="Wph-bM-CkY" id="fUf-3h-b7p"/>
+                <outlet property="replyTextView" destination="B8p-em-AJC" id="ki8-Q5-pui"/>
+                <outlet property="usernameLabel" destination="8ki-pd-Kfr" id="f2y-Xs-upo"/>
+            </connections>
+            <point key="canvasLocation" x="261" y="244.5"/>
         </tableViewCell>
     </objects>
 </document>
