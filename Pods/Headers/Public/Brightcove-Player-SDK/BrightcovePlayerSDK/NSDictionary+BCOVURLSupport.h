@@ -1,1 +1,1 @@
-../../../../Brightcove-Player-SDK/ios/dynamic/BrightcovePlayerSDK.framework/Headers/NSDictionary+BCOVURLSupport.h
+../../../../Brightcove-Player-SDK/ios/static/BrightcovePlayerSDK.framework/Headers/NSDictionary+BCOVURLSupport.h

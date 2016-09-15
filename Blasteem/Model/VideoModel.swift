@@ -15,12 +15,14 @@ class VideoModel: NSObject {
     var post_date:String?
     var post_title:String?
     var blast_count:Int?
+    
     var view_count:Int?
     var video_image:String?
     var blast_id:String?
     var post_content:String?
     var is_following_creator:Bool = false
     var is_blasted:Bool?
+    var is_liked:Bool = false
     var video_url:String?
     var is_read:Bool?
 }

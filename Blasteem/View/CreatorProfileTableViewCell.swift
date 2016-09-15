@@ -17,7 +17,7 @@ class CreatorProfileTableViewCell: UITableViewCell {
     
     @IBOutlet weak var titleLabel: UILabel!
     
-    var homeVC:HomeViewController?
+    weak var homeVC:HomeViewController?
     var video:VideoModel?{
         didSet{
             self.configureCell()

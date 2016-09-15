@@ -22,11 +22,14 @@ class WebViewController: UIViewController,UIWebViewDelegate {
         // Do any additional setup after loading the view.
         self.webview.delegate = self
         self.webview.loadRequest(NSURLRequest(URL: NSURL(string: url!)!))
+        self.webview.sizeToFit()
+        
         self.titleLabel.text = post_title
         AppUtil.showLoadingHud()
     }
     @IBAction func onBack(sender: AnyObject) {
-        self.navigationController?.popViewControllerAnimated(false)
+        AppUtil.disappearLoadingHud()
+        self.navigationController?.popViewControllerAnimated(true)
     }
 
     override func didReceiveMemoryWarning() {

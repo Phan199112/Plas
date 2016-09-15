@@ -17,7 +17,8 @@ class VideoDetailViewController: UIViewController,BCOVPlaybackControllerDelegate
     var service:BCOVPlaybackService?
     var timer:NSTimer?
     var reply_comment:CommentModel?
-    @IBOutlet weak var progressBar: UIProgressView!
+    
+    @IBOutlet weak var sliderBar: UISlider!
     var isPlay:Bool = false
     @IBOutlet weak var creator_viewCount: UILabel!
     @IBOutlet weak var creator_avatarImageView: UIImageView!
@@ -35,6 +36,8 @@ class VideoDetailViewController: UIViewController,BCOVPlaybackControllerDelegate
     @IBOutlet weak var fullScreenButton: UIButton!
     
     @IBOutlet weak var playpauseButton: UIButton!
+    
+    var currentPlayer:AVPlayer?
     
     var playerView:BCOVPUIPlayerView?
     
@@ -57,6 +60,8 @@ class VideoDetailViewController: UIViewController,BCOVPlaybackControllerDelegate
     var commentHeaderView = NSBundle.mainBundle().loadNibNamed("CommentHeaderView", owner: nil, options: nil)[0] as? CommentHeaderView
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationController!.interactivePopGestureRecognizer!.enabled = false
         self.commentHeaderView?.commentButton.addTarget(self, action: #selector(VideoDetailViewController.addComment), forControlEvents: .TouchUpInside)
         // Do any additional setup after loading the view.
         self.tableView.registerClass(RelateVideoTableViewCell.self, forCellReuseIdentifier: "relateVideoCell")
@@ -76,14 +81,54 @@ class VideoDetailViewController: UIViewController,BCOVPlaybackControllerDelegate
         self.loadAllData()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ForgotPasswordViewController.keyboardWillShow(_:)), name:UIKeyboardWillShowNotification, object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ForgotPasswordViewController.keyboardWillHide(_:)), name:UIKeyboardWillHideNotification, object: nil);
+        
+        self.sliderBar.tintColor = mainColor
+        
+        let thumbImage = UIImage(named: "10px")
+        let thumbSmallImage = UIImage(CGImage: (thumbImage?.CGImage)!, scale: 1, orientation: (thumbImage?.imageOrientation)!)
+        self.sliderBar.setThumbImage(thumbSmallImage, forState: .Normal)
+        self.sliderBar.value = 0
+        self.sliderBar.userInteractionEnabled = false
+        
+        
+    }
+    @IBAction func onSliderBegin(sender: AnyObject) {
+        let thumbImage = UIImage(named: "20px")
+        let thumbSmallImage = UIImage(CGImage: (thumbImage?.CGImage)!, scale: 1, orientation: (thumbImage?.imageOrientation)!)
+        self.sliderBar.setThumbImage(thumbSmallImage, forState: .Normal)
+        self.playerView?.playbackController.pause()
     }
     
+    @IBAction func onSliderEnd(sender: AnyObject) {
+        if let videoplayer = self.currentPlayer
+        {
+            let thumbImage = UIImage(named: "10px")
+            let thumbSmallImage = UIImage(CGImage: (thumbImage?.CGImage)!, scale: 1, orientation: (thumbImage?.imageOrientation)!)
+            self.sliderBar.setThumbImage(thumbSmallImage, forState: .Normal)
+            
+         
+            let sliderbar = sender as! UISlider
+            let newCurrentTime = Float64(sliderbar.value) * CMTimeGetSeconds((self.currentPlayer?.currentItem?.duration)!)
+            let seekToTime = CMTimeMakeWithSeconds(newCurrentTime, 600)
+            self.currentPlayer?.seekToTime(seekToTime, completionHandler: { (finished) in
+                if (finished &&  self.isPlay)
+                {
+                    self.playbackController?.play()
+                }
+            })
+        }
+        
+        
+    }
+    @IBAction func onSliderValueChanged(sender: AnyObject) {
+        
+    }
     func loadAllData() {
         
         if let video_id = video?.blast_id
         {
             self.loadVideoInfo(video_id)
-            self.loadData(video_id)
+            
             self.getComments(video_id)
         }
         
@@ -96,9 +141,9 @@ class VideoDetailViewController: UIViewController,BCOVPlaybackControllerDelegate
         
         request.addParameterWithKey("postid", value: video_id)
         request.addParameterWithKey("userid", value: String((AppSetting.current_user_id)!))
-        
+        AppUtil.showLoadingHud()
         ComManager().postRequestToServer(request, successHandler: { (responseBuilder) in
-            AppUtil.disappearLoadingHud()
+            
             if responseBuilder.isSuccessful!
             {
                 
@@ -114,10 +159,15 @@ class VideoDetailViewController: UIViewController,BCOVPlaybackControllerDelegate
                     
                     if responseBuilder.isSuccessful!
                     {
-                        self.video?.is_following_creator = responseBuilder.validateCreatorFollow()
-                        self.configureView()
-                        self.setupVieoView()
+                        dispatch_async(dispatch_get_main_queue()) {
+                            self.video?.is_following_creator = responseBuilder.validateCreatorFollow()
+                            self.loadData(video_id)
+                            self.configureView()
+                            self.setupVieoView()
+                        }
+                        
                     }else{
+                        AppUtil.disappearLoadingHud()
                         AppUtil.showErrorMessage(responseBuilder.reason!)
                     }
                     }, errorHandler: { (error) in
@@ -125,6 +175,7 @@ class VideoDetailViewController: UIViewController,BCOVPlaybackControllerDelegate
                 })
                
             }else{
+                AppUtil.disappearLoadingHud()
                 AppUtil.showErrorMessage(responseBuilder.reason!)
                 self.navigationController?.popViewControllerAnimated(true)
             }
@@ -212,6 +263,7 @@ class VideoDetailViewController: UIViewController,BCOVPlaybackControllerDelegate
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
+        self.playerView = nil
         AppUtil.disappearLoadingHud()
     }
     
@@ -239,8 +291,9 @@ class VideoDetailViewController: UIViewController,BCOVPlaybackControllerDelegate
         
         Utils.makeCircleFromRetacgleView(self.playpauseButton, radius: 30)
         Utils.makeCircleFromRetacgleView(self.fullScreenButton, radius: 20)
-        self.progressBar.progressTintColor = mainColor
-        self.progressBar.progress = 0
+//        self.progressBar.progressTintColor = mainColor
+//        self.progressBar.progress = 0
+        
 
     }
     
@@ -276,10 +329,16 @@ class VideoDetailViewController: UIViewController,BCOVPlaybackControllerDelegate
         }else{
             videoDetailview?.blastButton.setBackgroundImage(UIImage(named: "blast icon"), forState: .Normal)
         }
+        if (video?.is_liked)! {
+            videoDetailview?.likeButton.setBackgroundImage(UIImage(named: "unlike"), forState: .Normal)
+        }else{
+            videoDetailview?.likeButton.setBackgroundImage(UIImage(named: "likeicon"), forState: .Normal)
+        }
+        
         if let count = video?.like_count {
             videoDetailview?.like_countLabel.text = AppUtil.getStringFromInt(count)
         }
-        
+        videoDetailview?.likeButton.addTarget(self, action: #selector(VideoDetailViewController.onLike(_:)), forControlEvents: .TouchUpInside)
          videoDetailview?.shareButton.addTarget(self, action: #selector(VideoDetailViewController.shareVideo), forControlEvents: .TouchUpInside)
         self.tableView.tableHeaderView = videoDetailview!
 
@@ -319,6 +378,40 @@ class VideoDetailViewController: UIViewController,BCOVPlaybackControllerDelegate
 
     }
     
+    func onLike(sender:UIButton) {
+        let request = RequestBuilder()
+        request.url = ApiUrl.LIKE_VIDEO
+        var like_key = "Y"
+        if (video?.is_liked)! {
+            like_key = "N"
+        }
+        AppUtil.showLoadingHud()
+        request.addParameterWithKey("postid", value: String((video?.blast_id)!))
+        request.addParameterWithKey("likeit", value: like_key)
+        request.addParameterWithKey("userid", value: String(AppSetting.current_user_id!))
+        ComManager().postRequestToServer(request, successHandler: { (responseBuilder) in
+            AppUtil.disappearLoadingHud()
+            if responseBuilder.isSuccessful!
+            {
+                self.video?.is_liked = !((self.video?.is_liked)!)
+                if (self.video?.is_liked)!
+                {
+                    self.video?.like_count = (self.video?.like_count)! + 1
+                }else{
+                    self.video?.like_count = (self.video?.like_count)! - 1
+                }
+                
+                self.showVideoDetail()
+                
+            }else{
+                AppUtil.showErrorMessage(responseBuilder.reason!)
+            }
+        }) { (error) in
+            AppUtil.disappearLoadingHud()
+            
+        }
+    }
+    
     func shareVideo() {
         let shareText = video?.video_url as! AnyObject
 
@@ -331,20 +424,12 @@ class VideoDetailViewController: UIViewController,BCOVPlaybackControllerDelegate
     }
     
     @IBAction func showFullScreen(sender: AnyObject) {
-//        let topconstraint: NSLayoutConstraint = NSLayoutConstraint(item: self.videoView, attribute: .Top, relatedBy: .Equal, toItem: self.topLayoutGuide, attribute: .Bottom, multiplier: 1.0, constant: 0.0)
-//        let leftconstraint = NSLayoutConstraint(item: self.videoView, attribute: .Leading, relatedBy: .Equal, toItem: self.view, attribute: .LeadingMargin, multiplier: 1.0, constant: -20.0)
-//        
-//        let rightconstraint = NSLayoutConstraint(item: self.videoView, attribute: .Trailing, relatedBy: .Equal, toItem: self.view, attribute: .TrailingMargin, multiplier: 1.0, constant: -20.0)
-//        let bottomconstraint: NSLayoutConstraint = NSLayoutConstraint(item: self.videoView, attribute: .Bottom, relatedBy: .Equal, toItem: bottomLayoutGuide, attribute: .Top, multiplier: 1.0, constant: 0.0)
-//        let constraints = [topconstraint,leftconstraint,rightconstraint,bottomconstraint]
         if isFullScreenShow {
             let value = UIInterfaceOrientation.Portrait.rawValue
-            topConstraint.constant = 0
+//            topConstraint.constant = 0
             let navVC = self.navigationController as! RootNavViewController
             navVC.isLandScape = true
             videoConstraints.constant = 44
-//            self.videoView.addConstraints(viewconstriaints!)
-            UIDevice.currentDevice().setValue(value, forKey: "orientation")
             if DeviceType.IS_IPHONE_6 {
                 self.heightConstraints.constant = 200
             }
@@ -357,25 +442,37 @@ class VideoDetailViewController: UIViewController,BCOVPlaybackControllerDelegate
             self.videoView.frame = originalFrame!
             self.fullScreenButton.setBackgroundImage(UIImage(named: "ic_fullscreen"), forState: .Normal)
             self.view.layoutIfNeeded()
+            UIDevice.currentDevice().setValue(value, forKey: "orientation")
             isFullScreenShow = false
+            navVC.isLandScape = false
+            
+            
         }else{
             let navVC = self.navigationController as! RootNavViewController
             navVC.isLandScape = true
+            
             let value = UIInterfaceOrientation.LandscapeLeft.rawValue
             originalFrame = self.videoView.frame
-            topConstraint.constant = -8
+            topConstraint.constant = -10
             videoConstraints.constant = 0
-            
-            UIDevice.currentDevice().setValue(value, forKey: "orientation")
             self.fullScreenButton.setBackgroundImage(UIImage(named: "ic_fullscreen_exit"), forState: .Normal)
             let bound = self.view.bounds
             
             self.videoView.frame = bound
             
-            heightConstraints.constant = bound.height
+            heightConstraints.constant = bound.height + 20
             self.view.layoutIfNeeded()
+            UIDevice.currentDevice().setValue(value, forKey: "orientation")
+            
             isFullScreenShow = true
+            navVC.isLandScape = false
+            
         }
+        
+    }
+  
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+            return UIInterfaceOrientationMask.All
         
     }
     
@@ -383,10 +480,10 @@ class VideoDetailViewController: UIViewController,BCOVPlaybackControllerDelegate
         
         self.playerView?.playbackController.pause()
         self.playerView?.playbackController = nil
-        let navVC = self.navigationController as! RootNavViewController
-        navVC.isLandScape = false
+        let navVC = self.navigationController as? RootNavViewController
+        navVC!.isLandScape = false
 
-        self.navigationController?.popToRootViewControllerAnimated(true)
+        ViewManager.sharedInstance.popToMainPage()
     }
     
     @IBAction func tapVideo(sender: AnyObject) {
@@ -401,7 +498,7 @@ class VideoDetailViewController: UIViewController,BCOVPlaybackControllerDelegate
     
     func loadData(video_id:String) {
 
-        AppUtil.showLoadingHud()
+        
         let request = RequestBuilder()
         request.url = ApiUrl.GET_VIDEO_LIST
         request.addParameterWithKey("page", value: "1")
@@ -457,10 +554,16 @@ class VideoDetailViewController: UIViewController,BCOVPlaybackControllerDelegate
         AppUtil.showLoadingHudOnView(self.videoView)
         loadingFlag = true
         service?.findVideoWithVideoID(video?.video_id, parameters: nil, completion: { (video, jsonResponse, error) in
-            self.playbackController?.setVideos([video])
+            if video != nil
+            {
+                dispatch_async(dispatch_get_main_queue(),{
+                    self.playerView!.playbackController?.setVideos([video])
+                    //            self.playbackController?.play()
+                    self.isPlay = true
+                    
+                })
                 
-//            self.playbackController?.play()
-            self.isPlay = true
+            }
         })
     }
 
@@ -470,11 +573,11 @@ class VideoDetailViewController: UIViewController,BCOVPlaybackControllerDelegate
         AppUtil.dismissLoadingHud(self.videoView)
         if isPlay {
             self.playpauseButton.setBackgroundImage(UIImage(named: "ic_play"), forState: .Normal)
-            self.playbackController?.pause()
+            self.playerView!.playbackController?.pause()
             isPlay = false
         }else{
             self.playpauseButton.setBackgroundImage(UIImage(named: "ic_pause"), forState: .Normal)
-            self.playbackController?.play()
+            self.playerView!.playbackController?.play()
             self.playpauseButton.hidden = true
             self.fullScreenButton.hidden = true
             isPlay = true
@@ -541,6 +644,7 @@ class VideoDetailViewController: UIViewController,BCOVPlaybackControllerDelegate
             let footerView = UIView(frame: CGRectMake(0,0,ScreenSize.SCREEN_WIDTH,60))
             footerView.backgroundColor = UIColor.whiteColor()
             let button = UIButton(frame: CGRectMake((ScreenSize.SCREEN_WIDTH - 25)/2,30,25,14))
+            let selectbutton = UIButton(frame: CGRectMake((ScreenSize.SCREEN_WIDTH - 25)/2,30,30,30))
             if isFullShow {
                 button.setBackgroundImage(UIImage(named: "up_arrow"), forState: .Normal)
                 
@@ -548,8 +652,9 @@ class VideoDetailViewController: UIViewController,BCOVPlaybackControllerDelegate
                 button.setBackgroundImage(UIImage(named: "down_arrow"), forState: .Normal)
                 
             }
-            button.addTarget(self, action: #selector(VideoDetailViewController.controlFullShow(_:)), forControlEvents: .TouchUpInside)
+            selectbutton.addTarget(self, action: #selector(VideoDetailViewController.controlFullShow(_:)), forControlEvents: .TouchUpInside)
             footerView.addSubview(button)
+            footerView.addSubview(selectbutton)
             return footerView
         }else{
             return nil
@@ -557,11 +662,12 @@ class VideoDetailViewController: UIViewController,BCOVPlaybackControllerDelegate
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.view.endEditing(true)
         if indexPath.section == 0 {
 //            self.video = self.videoArray[indexPath.row]
             self.playerView?.playbackController.pause()
             self.playerView?.playbackController = nil
-            
+            self.navigationController?.popViewControllerAnimated(false)
             ViewManager.sharedInstance.showVideoPage(self.videoArray[indexPath.row], homeVC: nil, creatorVC: nil)
         }
     }
@@ -598,7 +704,7 @@ class VideoDetailViewController: UIViewController,BCOVPlaybackControllerDelegate
     
     func keyboardWillShow(notification: NSNotification) {
         if DeviceType.IS_IPHONE_4_OR_LESS {
-            heightConstraints.constant = 100
+            heightConstraints.constant = 70
             self.view.layoutSubviews()
         }
         var firstsectionCount:Int = 0
@@ -615,7 +721,13 @@ class VideoDetailViewController: UIViewController,BCOVPlaybackControllerDelegate
     
     deinit
     {
+        self.playerView?.playbackController.setVideos(nil)
+        self.playerView = nil
+        self.playbackController = nil
+        timer?.invalidate()
+        timer = nil
         NSNotificationCenter.defaultCenter().removeObserver(self)
+        
     }
     
     func keyboardWillHide(notification:NSNotification){
@@ -687,27 +799,26 @@ class VideoDetailViewController: UIViewController,BCOVPlaybackControllerDelegate
         var percent:Float = 0
         if !isnan(duration) {
             AppUtil.dismissLoadingHud(self.videoView)
+            self.sliderBar.userInteractionEnabled = true
             percent = Float(progress / duration)
         }
-        
-        self.progressBar.progress = percent
+        self.sliderBar.value = percent
+//        self.progressBar.progress = percent
 //        NSTimeInterval duration = CMTimeGetSeconds(session.player.currentItem.duration);
 //        float percent = progress / duration;
 //        self.playheadSlider.value = isnan(percent) ? 0.0f : percent;
     }
     
-    
-    override func shouldAutorotate() -> Bool {
-        return true
+    func playbackController(controller: BCOVPlaybackController!, didAdvanceToPlaybackSession session: BCOVPlaybackSession!) {
+        self.currentPlayer = session.player
     }
+    
+   
     //     override func shouldAutorotateToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation) -> Bool {
     //        return UIInterfaceOrientationIsPortrait(interfaceOrientation)
     //    }
     
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return UIInterfaceOrientationMask.All
-        
-    }
+    
     
     /*
     // MARK: - Navigation

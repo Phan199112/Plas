@@ -104,6 +104,7 @@ class UpdateProfileTableViewController: UITableViewController ,UIImagePickerCont
     }
     
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+        self.view.endEditing(true)
         if textField == self.sexField {
             
             self.homeVC?.pickerType = "gender"
@@ -143,6 +144,10 @@ class UpdateProfileTableViewController: UITableViewController ,UIImagePickerCont
             return 0
             
         }
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.view.endEditing(true)
     }
     
 //    override func scrollViewDidScroll(scrollView: UIScrollView) {

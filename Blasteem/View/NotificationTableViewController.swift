@@ -10,7 +10,7 @@ import UIKit
 
 class NotificationTableViewController: UITableViewController {
 
-    var notificationArray:[VideoModel] = []
+    weak var mainVC:MainViewController?
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -20,12 +20,46 @@ class NotificationTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         self.tableView.registerNib(UINib(nibName: "NotificationTableViewCell",bundle: nil), forCellReuseIdentifier: "notificationCell")
-        self.notificationArray = AppSetting.notification_arr
+        
+        self.loadData()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
         self.loadData()
     }
 
     func loadData() {
+        let request = RequestBuilder()
         
+        request.url = ApiUrl.GET_NOTIFICATIONS
+        if let device_token = USER_DEFAULTS.objectForKey("device_token") {
+            request.addParameterWithKey("token", value: device_token)
+        }else{
+            return
+        }
+        
+        request.addParameterWithKey("os", value: "iOS")
+        
+        
+        ComManager().getRequestToServer(request, successHandler: { (responseBuilder) in
+            
+            responseBuilder.getNotifications()
+            UIApplication.sharedApplication().applicationIconBadgeNumber = responseBuilder.getCountOfUnRead()
+            if responseBuilder.getCountOfUnRead() == 0
+            {
+                self.mainVC!.badgeLabel.backgroundColor = UIColor.clearColor()
+                self.mainVC!.badgeLabel.text = ""
+                
+            }else{
+                self.mainVC!.badgeLabel.backgroundColor = UIColor.redColor()
+                self.mainVC!.badgeLabel.text = String(responseBuilder.getCountOfUnRead())
+                
+            }
+            self.tableView.reloadData()
+            
+        }) { (error) in
+            
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -35,24 +69,41 @@ class NotificationTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return notificationArray.count
+        return AppSetting.notification_arr.count
     }
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("notificationCell", forIndexPath: indexPath) as? NotificationTableViewCell
-        cell?.notification = notificationArray[indexPath.row]
+        cell?.notification = AppSetting.notification_arr[indexPath.row]
         // Configure the cell...
         
         return cell!
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        ViewManager.sharedInstance.showVideoPage(self.notificationArray[indexPath.row], homeVC: nil, creatorVC: nil)
+        let request = RequestBuilder()
+        
+        request.url = ApiUrl.GET_NOTIFICATIONS
+        if let device_token = USER_DEFAULTS.objectForKey("device_token") {
+            request.addParameterWithKey("token", value: device_token)
+        }else{
+            return
+        }
+        request.addParameterWithKey("os", value: "iOS")
+        request.addParameterWithKey("id", value: Int(AppSetting.notification_arr[indexPath.row].blast_id!)!)
+        request.addParameterWithKey("viewed", value: "true")
+        ComManager().postRequestToServer(request, successHandler: { (responseBuilder) in
+           
+        }) { (error) in
+                
+        }
+        
+        ViewManager.sharedInstance.showVideoPage(AppSetting.notification_arr[indexPath.row], homeVC: nil, creatorVC: nil)
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 70
+        return 84
     }
     /*
     // Override to support conditional editing of the table view.

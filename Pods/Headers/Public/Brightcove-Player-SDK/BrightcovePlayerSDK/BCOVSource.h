@@ -1,1 +1,1 @@
-../../../../Brightcove-Player-SDK/ios/dynamic/BrightcovePlayerSDK.framework/Headers/BCOVSource.h
+../../../../Brightcove-Player-SDK/ios/static/BrightcovePlayerSDK.framework/Headers/BCOVSource.h

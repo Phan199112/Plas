@@ -20,7 +20,7 @@ class HomeTableViewCell: UITableViewCell,UIAlertViewDelegate {
 
     @IBOutlet weak var blastCountLabel: UILabel!
     @IBOutlet weak var halfBlastLabel: UILabel!
-    var homeVC:HomeViewController?
+    weak var homeVC:HomeViewController?
     var video:VideoModel?{
         didSet{
             self.configureCell()
@@ -80,7 +80,8 @@ class HomeTableViewCell: UITableViewCell,UIAlertViewDelegate {
                 origin_creator!.blast_count = creator.blast_count
                 origin_creator!.view_count = creator.view_count
                 origin_creator!.follower_count = creator.follower_count
-                
+                AppSetting.setNone()
+                NSNotificationCenter.defaultCenter().postNotificationName("SlideMenuNotification", object: nil,userInfo: ["menu":SlideMenu.creatorProfile.rawValue])
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let creatorDetailVC = storyboard.instantiateViewControllerWithIdentifier("CreatorDetailTableViewController") as? CreatorDetailTableViewController
                 

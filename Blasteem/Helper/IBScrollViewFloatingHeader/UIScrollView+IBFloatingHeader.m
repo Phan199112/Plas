@@ -87,7 +87,7 @@ static void * IBFloatingHeaderViewContext = &IBFloatingHeaderViewContext;
         [self.floatingHeaderView setFrame:floatingFrame];
     }
     if(isHeaderShowing){
-        CGFloat difference = oldYOffset-newYOffset;
+        
         CGRect floatingFrame = self.floatingHeaderView.frame;
         //floatingFrame.origin.y = floatingFrame.origin.y  + difference;
         if(floatingFrame.origin.y>newYOffset)

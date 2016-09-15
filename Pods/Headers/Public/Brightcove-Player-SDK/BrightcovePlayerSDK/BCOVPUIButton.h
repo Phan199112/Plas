@@ -1,1 +1,1 @@
-../../../../Brightcove-Player-SDK/ios/dynamic/BrightcovePlayerSDK.framework/Headers/BCOVPUIButton.h
+../../../../Brightcove-Player-SDK/ios/static/BrightcovePlayerSDK.framework/Headers/BCOVPUIButton.h

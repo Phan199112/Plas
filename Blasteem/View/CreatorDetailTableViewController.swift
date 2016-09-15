@@ -30,7 +30,7 @@ class CreatorDetailTableViewController: UITableViewController,UIAlertViewDelegat
     
     var offset:Int = 1
     var isLoadMore:Bool = false
-    var is_follow:Bool?
+    var is_follow:Bool = false
     var alert1:UIAlertView?
     var alert2:UIAlertView?
     override func viewDidLoad() {
@@ -53,7 +53,7 @@ class CreatorDetailTableViewController: UITableViewController,UIAlertViewDelegat
     func loadFollowUser() {
         
         self.creator?.follower_count = (self.creator?.follower_count)! + 1
-        self.is_follow = !(self.is_follow)!
+        self.is_follow = !(self.is_follow)
         self.loadFavoriteView()
         
     }
@@ -114,19 +114,19 @@ class CreatorDetailTableViewController: UITableViewController,UIAlertViewDelegat
     }
     
     func loadFavoriteView() {
-        if (self.is_follow)!{
+        if (self.is_follow){
             self.favoriteLabel.text = "       NON SEGUIRE  "
             self.favoriteLabel.layer.setNeedsLayout()
             self.favoriteIcon.image = UIImage(named: "minus_button")
             for video in videoArray {
-                video.is_following_creator = (self.is_follow)!
+                video.is_following_creator = (self.is_follow)
             }
         }else{
             self.favoriteLabel.text = "       SEGUI  "
             self.favoriteLabel.layer.setNeedsLayout()
             self.favoriteIcon.image = UIImage(named: "home_ic_plus_button")
             for video in videoArray {
-                video.is_following_creator = (self.is_follow)!
+                video.is_following_creator = (self.is_follow)
             }
         }
     }
@@ -134,7 +134,7 @@ class CreatorDetailTableViewController: UITableViewController,UIAlertViewDelegat
     @IBAction func onFavorite(sender: AnyObject) {
         
         
-        if (self.is_follow)! {
+        if (self.is_follow) {
             alert1 = UIAlertView(title: "", message: "Non vuoi più seguire " + self.creator!.name! + "?", delegate: self, cancelButtonTitle: "NO", otherButtonTitles: "SI")
             alert1!.show()
             
@@ -159,7 +159,7 @@ class CreatorDetailTableViewController: UITableViewController,UIAlertViewDelegat
             AppUtil.disappearLoadingHud()
             if responseBuilder.isSuccessful!
             {
-                self.is_follow = !(self.is_follow)!
+                self.is_follow = !(self.is_follow)
                 self.loadFavoriteView()
                 
             }else{

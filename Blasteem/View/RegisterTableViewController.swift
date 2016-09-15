@@ -106,6 +106,7 @@ class RegisterTableViewController: UITableViewController,UIImagePickerController
             emailField.text = currentUser?.email
             avatarImageView.sd_setImageWithURL(NSURL(string: (currentUser?.avatar_url)!))
             ageField.text = currentUser?.birthdate?.stringWithFormat("dd-MM-yyyy")
+            sexField.text = currentUser?.sex
         }
         
         self.tableView.keyboardDismissMode = .Interactive
@@ -141,8 +142,9 @@ class RegisterTableViewController: UITableViewController,UIImagePickerController
     }
     
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+        self.view.endEditing(true)
         if textField == self.sexField {
-        
+            
             self.homeVC?.pickerType = "gender"
             self.homeVC?.showPickerView()
             return false
@@ -353,6 +355,10 @@ class RegisterTableViewController: UITableViewController,UIImagePickerController
             AppUtil.showErrorMessage("")
         }
         
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.view.endEditing(true)
     }
     override func scrollViewDidScroll(scrollView: UIScrollView) {
         

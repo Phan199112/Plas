@@ -14,8 +14,9 @@ pod 'FBSDKCoreKit'
 pod 'FBSDKLoginKit'
 pod 'FBSDKShareKit'
 pod 'SVProgressHUD'
-pod 'Brightcove-Player-SDK/dynamic', '~> 5.1'
+pod 'Brightcove-Player-SDK', '~> 5.1'
 pod 'KVNProgress'
 pod 'JDFPeekaboo'
+pod 'RSKImageCropper'
 end
 

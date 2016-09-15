@@ -15,7 +15,7 @@ class CommentTableViewCell: UITableViewCell {
     @IBOutlet weak var avatarImageView: UIImageView!
     var comment_index:Int?
     var comment:CommentModel?
-    var homeVC:VideoDetailViewController?
+    weak var homeVC:VideoDetailViewController?
     
     override func awakeFromNib() {
         super.awakeFromNib()

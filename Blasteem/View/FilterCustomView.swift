@@ -49,7 +49,7 @@ class FilterCustomView: UIView {
         top_button.addTarget(self, action: #selector(FilterCustomView.onTappedTop(_:)), forControlEvents: UIControlEvents.TouchDown)
         
         new_view!.image_name = "home_ic_filter_news"
-        new_view!.title = "NEWS"
+        new_view!.title = "NEW"
         
         visit_view!.image_name = "home_ic_tab_eye"
         visit_view!.title = "PIU VISTI"

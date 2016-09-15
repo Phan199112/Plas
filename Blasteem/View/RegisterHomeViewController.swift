@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RegisterHomeViewController: UIViewController,UIScrollViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource,UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+class RegisterHomeViewController: UIViewController,UIScrollViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource,UIImagePickerControllerDelegate, UINavigationControllerDelegate, RSKImageCropViewControllerDelegate{
     var currentUser:UserModel?
     
     @IBOutlet weak var overlayView: UIView!
@@ -33,7 +33,7 @@ class RegisterHomeViewController: UIViewController,UIScrollViewDelegate,UIPicker
     @IBOutlet weak var termsWebView: UIWebView!
     
     @IBOutlet weak var selectButton: UIButton!
-    var containerVC:RegisterTableViewController?
+    weak var containerVC:RegisterTableViewController?
     
     var pickerType:String = "birthday"
     
@@ -43,9 +43,10 @@ class RegisterHomeViewController: UIViewController,UIScrollViewDelegate,UIPicker
         // Do any additional setup after loading the view.
         self.countryPickerView.delegate = self
         self.countryPickerView.dataSource = self
-
+        
         
         self.birthdayPickerView.subviews[0].subviews[1].backgroundColor = UIColor.whiteColor()
+        self.birthdayPickerView.maximumDate = NSDate()
         self.birthdayPickerView.subviews[0].subviews[2].backgroundColor = UIColor.whiteColor()
         Utils.makeCircleFromRetacgleView(self.selectButton, radius: 3)
         
@@ -139,6 +140,10 @@ class RegisterHomeViewController: UIViewController,UIScrollViewDelegate,UIPicker
         }
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.hidden = true
+    }
     //PickerViewDelegate and DataSources
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         
@@ -167,6 +172,8 @@ class RegisterHomeViewController: UIViewController,UIScrollViewDelegate,UIPicker
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
     
     @IBAction func onSelectButton(sender: AnyObject) {
         switch pickerType {
@@ -197,7 +204,7 @@ class RegisterHomeViewController: UIViewController,UIScrollViewDelegate,UIPicker
             self.overlayView.hidden = true
             let imagePicker = UIImagePickerController()
             imagePicker.sourceType = .Camera
-            imagePicker.allowsEditing = true
+            
             imagePicker.delegate = self
             self.presentViewController(imagePicker, animated: true, completion: nil)
         }
@@ -212,8 +219,9 @@ class RegisterHomeViewController: UIViewController,UIScrollViewDelegate,UIPicker
             self.overlayView.hidden = true
             let imagePicker = UIImagePickerController()
             imagePicker.sourceType = .PhotoLibrary
-            imagePicker.allowsEditing = true
+            
             imagePicker.delegate = self
+            
             self.presentViewController(imagePicker, animated: true, completion: nil)
         }
 
@@ -237,11 +245,24 @@ class RegisterHomeViewController: UIViewController,UIScrollViewDelegate,UIPicker
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         
-        containerVC!.currentUser?.avatar_data = UIImageJPEGRepresentation(info[UIImagePickerControllerEditedImage] as! UIImage, 0.5)
-        containerVC!.avatarImageView.image = info[UIImagePickerControllerEditedImage] as? UIImage
+        
         picker.dismissViewControllerAnimated(true) { 
-            
+            var imageCropVC : RSKImageCropViewController!
+            imageCropVC = RSKImageCropViewController(image: info[UIImagePickerControllerOriginalImage] as! UIImage, cropMode: .Circle)
+            imageCropVC.delegate = self
+            self.navigationController?.pushViewController(imageCropVC, animated: true)
         }
+        
+    }
+    
+    func imageCropViewControllerDidCancelCrop(controller: RSKImageCropViewController) {
+        self.navigationController?.popViewControllerAnimated(true)
+    }
+    
+    func imageCropViewController(controller: RSKImageCropViewController, didCropImage croppedImage: UIImage, usingCropRect cropRect: CGRect) {
+        self.navigationController?.popViewControllerAnimated(true)
+        containerVC!.currentUser?.avatar_data = UIImageJPEGRepresentation(croppedImage, 0.5)
+        containerVC!.avatarImageView.image = croppedImage
         
     }
     

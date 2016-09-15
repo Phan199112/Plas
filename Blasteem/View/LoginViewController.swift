@@ -72,7 +72,7 @@ class LoginViewController: UIViewController ,GIDSignInDelegate ,GIDSignInUIDeleg
     
     @IBAction func onLogin(sender: AnyObject) {
         self.view.endEditing(true)
-        if !Utils.checkIfStringContainsText(usernameField.text){
+         if !Utils.checkIfStringContainsText(usernameField.text){
             AppUtil.showErrorMessage("Username richiesta")
             return
         }
@@ -91,6 +91,9 @@ class LoginViewController: UIViewController ,GIDSignInDelegate ,GIDSignInUIDeleg
             
                             if responseBuilder.isSuccessful!
                             {
+                                self.usernameField.text = ""
+                                self.passwordField.text = ""
+                                
                                 AppSetting.current_user_id = responseBuilder.loginResponseHandler()
                                 let request1 = RequestBuilder()
                                 
@@ -107,7 +110,7 @@ class LoginViewController: UIViewController ,GIDSignInDelegate ,GIDSignInUIDeleg
                                     }else{
                                         AppUtil.showErrorMessage(responseBuilder.reason!)
                                     }
-                                    AppUtil.disappearLoadingHud()
+                                    
                                     }, errorHandler: { (error) in
                                         AppUtil.disappearLoadingHud()
                                 })
@@ -149,9 +152,19 @@ class LoginViewController: UIViewController ,GIDSignInDelegate ,GIDSignInUIDeleg
                         let birth_day = userData["birth_day"] as? String
                         let birth_day_date = NSDate(fromString: birth_day, withFormat: "MM/dd/yyyy")
                         let last_name = userData["last_name"] as? String
-                        let pictureUrl = "https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1" + facebookID!
+                        let pictureDict = userData["picture"] as? [String:AnyObject]
+                        let picturedata = pictureDict!["data"] as? [String:AnyObject]
+                        let gender = userData["gender"] as? String
+                        var sex = ""
+                        if gender == "male"
+                        {
+                            sex = sex_arr[0]
+                        }else{
+                            sex = sex_arr[1]
+                        }
+                        let pictureUrl = picturedata!["url"] as? String
                         let user_link = userData["link"] as? String
-                        let currentUser:UserModel = UserModel(user_id: nil, fb_id: facebookID, google_id: nil, avatar_url: pictureUrl, avatar_data: nil, firstname: first_name, lastname: last_name, birthdate: birth_day_date, sex: nil, address: nil, email: email, username: nil, password: nil, user_link: user_link)
+                        let currentUser:UserModel = UserModel(user_id: nil, fb_id: facebookID, google_id: nil, avatar_url: pictureUrl, avatar_data: nil, firstname: first_name, lastname: last_name, birthdate: birth_day_date, sex: sex, address: nil, email: email, username: nil, password: nil, user_link: user_link)
                         
                         let request = RequestBuilder()
                         request.url = ApiUrl.VALIDATE_FB

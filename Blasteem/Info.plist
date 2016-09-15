@@ -21,9 +21,11 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb929545720488087</string>
+				<string>fb1732032747066580</string>
 			</array>
 		</dict>
 		<dict>
@@ -31,7 +33,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.837263313080-snai5n77fiq1otmks36j2nmv05dm5hq2</string>
+				<string>com.googleusercontent.apps.1048059752100-1dad7s3on1gvrss8tkv8hpdb75h2g92u</string>
 			</array>
 		</dict>
 		<dict>
@@ -39,16 +41,16 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.thai.Blasteem</string>
+				<string>com.blasteem.blasteem</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>FacebookAppID</key>
-	<string>929545720488087</string>
+	<string>1732032747066580</string>
 	<key>FacebookDisplayName</key>
-	<string>Blasteem</string>
+	<string>Blasteem Social F-Login</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>

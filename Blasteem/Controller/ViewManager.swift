@@ -56,11 +56,20 @@ class ViewManager: NSObject {
     }
     
     func showLoginPage() {
-        USER_DEFAULTS.setBool(false, forKey: IS_LOGIN)
-        USER_DEFAULTS.setObject(nil, forKey: Current_User_ID)
+        for key in Array(NSUserDefaults.standardUserDefaults().dictionaryRepresentation().keys) {
+            NSUserDefaults.standardUserDefaults().removeObjectForKey(key)
+        }
+
         setRootVC()
     }
     
+    func popToMainPage() {
+        
+        while !(rootNavVC?.visibleViewController?.isKindOfClass(SWRevealViewController.self))! {
+            rootNavVC?.popViewControllerAnimated(false)
+        }
+        
+    }
     func showVideoPage(video:VideoModel,homeVC:HomeViewController?,creatorVC:CreatorDetailTableViewController?) {
         let videoVC = storyBoard.instantiateViewControllerWithIdentifier("VideoDetailViewController") as? VideoDetailViewController
         videoVC?.video = video

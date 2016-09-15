@@ -17,6 +17,7 @@ enum SlideMenu:String {
     case Faq
     case Aboutus
     case Logout
+    case creatorProfile
     
     static func getAllMenus() -> [SlideMenu]{
         return [SlideMenu.Profile,SlideMenu.Creators,SlideMenu.Meet,SlideMenu.News,SlideMenu.Factory,SlideMenu.Faq,SlideMenu.Aboutus,SlideMenu.Logout]

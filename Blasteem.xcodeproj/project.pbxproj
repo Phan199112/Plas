@@ -72,7 +72,6 @@
 		0A3FC5C31D66032D006615BA /* RegisterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3FC5C21D66032D006615BA /* RegisterTableViewController.swift */; };
 		0A3FC5C51D660544006615BA /* RequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3FC5C41D660544006615BA /* RequestBuilder.swift */; };
 		0A3FC5C91D664AAE006615BA /* ProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A3FC5C81D664AAE006615BA /* ProgressHUD.m */; };
-		0A3FC5CB1D6650E2006615BA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A3FC5CA1D6650E2006615BA /* GoogleService-Info.plist */; };
 		0A3FC5DC1D66849E006615BA /* TOActionSheetLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0A3FC5CD1D66849E006615BA /* TOActionSheetLocalizable.strings */; };
 		0A3FC5DD1D66849F006615BA /* TOActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A3FC5D91D66849E006615BA /* TOActionSheet.m */; };
 		0A3FC5E01D670F5E006615BA /* NSDate+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A3FC5DF1D670F5E006615BA /* NSDate+Helper.m */; };
@@ -105,6 +104,7 @@
 		0AAACDEB1D6A92BF007C3CCC /* CreatorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAACDEA1D6A92BF007C3CCC /* CreatorModel.swift */; };
 		0ABE93891D70F7CC00EBACFB /* LandScapeVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABE93871D70F7CC00EBACFB /* LandScapeVideoViewController.swift */; };
 		0ABE938A1D70F7CC00EBACFB /* LandScapeVideoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0ABE93881D70F7CC00EBACFB /* LandScapeVideoViewController.xib */; };
+		0AE7CEE61D846F2F00DEBF20 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0AE7CEE51D846F2F00DEBF20 /* GoogleService-Info.plist */; };
 		0AFBAD311D6E7B7D0088B605 /* RelateVideoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFBAD2F1D6E7B7D0088B605 /* RelateVideoTableViewCell.swift */; };
 		0AFBAD321D6E7B7D0088B605 /* RelateVideoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AFBAD301D6E7B7D0088B605 /* RelateVideoTableViewCell.xib */; };
 		0AFBAD341D6EAEEE0088B605 /* VideoDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFBAD331D6EAEEE0088B605 /* VideoDetailHeaderView.swift */; };
@@ -211,7 +211,6 @@
 		0A3FC5C41D660544006615BA /* RequestBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestBuilder.swift; sourceTree = "<group>"; };
 		0A3FC5C71D664AAE006615BA /* ProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressHUD.h; sourceTree = "<group>"; };
 		0A3FC5C81D664AAE006615BA /* ProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressHUD.m; sourceTree = "<group>"; };
-		0A3FC5CA1D6650E2006615BA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0A3FC5CE1D66849E006615BA /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/TOActionSheetLocalizable.strings; sourceTree = "<group>"; };
 		0A3FC5CF1D66849E006615BA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/TOActionSheetLocalizable.strings; sourceTree = "<group>"; };
 		0A3FC5D01D66849E006615BA /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/TOActionSheetLocalizable.strings; sourceTree = "<group>"; };
@@ -263,6 +262,7 @@
 		0AAACDEA1D6A92BF007C3CCC /* CreatorModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreatorModel.swift; sourceTree = "<group>"; };
 		0ABE93871D70F7CC00EBACFB /* LandScapeVideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandScapeVideoViewController.swift; sourceTree = "<group>"; };
 		0ABE93881D70F7CC00EBACFB /* LandScapeVideoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LandScapeVideoViewController.xib; sourceTree = "<group>"; };
+		0AE7CEE51D846F2F00DEBF20 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0AFBAD2F1D6E7B7D0088B605 /* RelateVideoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelateVideoTableViewCell.swift; sourceTree = "<group>"; };
 		0AFBAD301D6E7B7D0088B605 /* RelateVideoTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RelateVideoTableViewCell.xib; sourceTree = "<group>"; };
 		0AFBAD331D6EAEEE0088B605 /* VideoDetailHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoDetailHeaderView.swift; sourceTree = "<group>"; };
@@ -386,7 +386,7 @@
 				0A2678681D64AE5900DCB621 /* Assets.xcassets */,
 				0A26786A1D64AE5900DCB621 /* LaunchScreen.storyboard */,
 				0A26786D1D64AE5900DCB621 /* Info.plist */,
-				0A3FC5CA1D6650E2006615BA /* GoogleService-Info.plist */,
+				0AE7CEE51D846F2F00DEBF20 /* GoogleService-Info.plist */,
 				0A3FC57F1D65450C006615BA /* Resource */,
 				0A3FC5A11D655A1E006615BA /* Blasteem-Bridging-Header.h */,
 			);
@@ -687,7 +687,7 @@
 				TargetAttributes = {
 					0A26785D1D64AE5900DCB621 = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = 4F4T892EPR;
+						DevelopmentTeam = X7Z546LXWP;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 1;
@@ -739,7 +739,6 @@
 				0A3FC5911D65450C006615BA /* OpenSans-Italic.ttf in Resources */,
 				0A3FC58E1D65450C006615BA /* OpenSans-BoldItalic.ttf in Resources */,
 				0A1A33FB1D67A80200EC75BA /* Info.plist in Resources */,
-				0A3FC5CB1D6650E2006615BA /* GoogleService-Info.plist in Resources */,
 				0A26786C1D64AE5900DCB621 /* LaunchScreen.storyboard in Resources */,
 				0ABE938A1D70F7CC00EBACFB /* LandScapeVideoViewController.xib in Resources */,
 				0AFBAD321D6E7B7D0088B605 /* RelateVideoTableViewCell.xib in Resources */,
@@ -762,6 +761,7 @@
 				0A1A33FA1D67A80200EC75BA /* TOCropViewControllerLocalizable.strings in Resources */,
 				0A3365021D7569B8001AE324 /* NotificationTableViewCell.xib in Resources */,
 				0A2678671D64AE5900DCB621 /* Main.storyboard in Resources */,
+				0AE7CEE61D846F2F00DEBF20 /* GoogleService-Info.plist in Resources */,
 				0A3FC5961D65450C006615BA /* OpenSans-SemiboldItalic.ttf in Resources */,
 				0A3FC5921D65450C006615BA /* OpenSans-Light.ttf in Resources */,
 				0A3FC5941D65450C006615BA /* OpenSans-Regular.ttf in Resources */,
@@ -1056,8 +1056,8 @@
 			baseConfigurationReference = E4B24D9AFF960F6E205D9C10 /* Pods-Blasteem.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1066,7 +1066,7 @@
 				INFOPLIST_FILE = Blasteem/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.thai.Blasteem;
+				PRODUCT_BUNDLE_IDENTIFIER = com.blasteem.blasteem;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Blasteem/Blasteem-Bridging-Header.h";
@@ -1079,8 +1079,8 @@
 			baseConfigurationReference = 2A21F64774B65EC6880587CB /* Pods-Blasteem.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1089,7 +1089,8 @@
 				INFOPLIST_FILE = Blasteem/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.thai.Blasteem;
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.blasteem.blasteem;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Blasteem/Blasteem-Bridging-Header.h";

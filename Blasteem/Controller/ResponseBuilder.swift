@@ -29,6 +29,7 @@ class ResponseBuilder: NSObject {
     func registerResponseHandler(user:UserModel) -> Void {
         user.avatar_url = response?.objectForKey("user_image") as? String
         user.user_id = response?.objectForKey("user_id") as? Int
+        USER_DEFAULTS.setObject((response?.objectForKey("user_id") as! Int), forKey: Current_User_ID)
         USER_DEFAULTS.setObject(NSKeyedArchiver.archivedDataWithRootObject(user), forKey: Current_User)
         USER_DEFAULTS.setBool(true, forKey: IS_LOGIN)
         AppSetting.currentUser = user
@@ -263,6 +264,14 @@ class ResponseBuilder: NSObject {
                 video.is_blasted = true
             }
         }
+        if let is_blasted = video_info["is_liked"] as? String {
+            if is_blasted == "N" {
+                video.is_liked = false
+            }else{
+                video.is_liked = true
+            }
+        }
+        
         video.blast_id = video_info["ID"] as? String
         video.video_id = video_info["video_id"] as? String
         video.video_image = video_info["video_image"] as? String
@@ -300,6 +309,11 @@ class ResponseBuilder: NSObject {
                 //Others
                 video.video_image = video_dict["thumbnail"] as? String
                 video.blast_id = String(video_dict["id"] as! Int)
+                if let video_id = USER_DEFAULTS.objectForKey("video_id") as? String {
+                    if video.blast_id == video_id {
+                        video.is_read = true
+                    }
+                }
                 video.post_title = video_dict["title"] as? String
                 video.post_date = video_dict["date"] as? String
                 return_arr.append(video)

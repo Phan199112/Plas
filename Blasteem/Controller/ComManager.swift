@@ -12,7 +12,7 @@ import Alamofire
 class ComManager: NSObject {
     typealias APIHandler = (responseBuilder:ResponseBuilder) -> Void
     typealias VideoListHandler = (videolist:[VideoModel]) -> Void
-    typealias ErrorHandler = (error:NSError) ->Void
+    typealias ErrorHandler = (error:NSError?) ->Void
     
     typealias TokenHandler = (isSuccess:Bool,error:NSError?) -> Void
     let url:String = ApiUrl.BASEURL
@@ -77,7 +77,7 @@ class ComManager: NSObject {
                     errorHandler(error: error)
                 }
             }else{
-                errorHandler(error: error!)
+                errorHandler(error: error)
             }
         }
         
@@ -119,7 +119,7 @@ class ComManager: NSObject {
                 let param = NSDictionary(objects: ["refresh_token",(token?.refresh_token)!,AppCredential.CLIENT_ID,AppCredential.CLIENT_SECRET], forKeys: ["grant_type","refresh_token","client_id","client_secret"])
                 self.executeHttpPostRequest(url + oauth_url, params: param, SuccessHandler: { (result) in
                     
-                     let code = result.objectForKey("code") as? String
+                     let code = result.objectForKey("error") as? String
                     
                         if code == "invalid_grant"
                         {
@@ -148,12 +148,22 @@ class ComManager: NSObject {
         }else{
             let param = NSDictionary(objects: ["password",AppCredential.CLIENT_ID,AppCredential.CLIENT_SECRET,AppCredential.API_UNAME,AppCredential.API_PWD], forKeys: ["grant_type","client_id","client_secret","username","password"])
             self.executeHttpPostRequest(url + oauth_url, params: param, SuccessHandler: { (result) in
-                let newToken = AppTokenModel(access_token: result["access_token"] as? String, expires_in: (result["expires_in"] as? Double)! + NSDate().timeIntervalSince1970, refresh_token: result["refresh_token"] as? String, scope: result["scope"] as? String)
-                USER_DEFAULTS.setObject(NSKeyedArchiver.archivedDataWithRootObject(newToken), forKey: APP_TOKEN)
-                self.access_token = newToken.access_token
-                tokenHandler(isSuccess: true, error: nil)
+                let status = result["code"] as? String
+                
+                if status != nil{
+                    
+                    tokenHandler(isSuccess: false , error: nil)
+                }else{
+                    let newToken = AppTokenModel(access_token: result["access_token"] as? String, expires_in: (result["expires_in"] as? Double)! + NSDate().timeIntervalSince1970, refresh_token: result["refresh_token"] as? String, scope: result["scope"] as? String)
+                    USER_DEFAULTS.setObject(NSKeyedArchiver.archivedDataWithRootObject(newToken), forKey: APP_TOKEN)
+                    self.access_token = newToken.access_token
+                    tokenHandler(isSuccess: true, error: nil)
+                    
+                }
+                
+                
                 }, Errorhandler: { (error) in
-                    tokenHandler(isSuccess: true , error: error)
+                    tokenHandler(isSuccess: false , error: error)
             })
         }
     }

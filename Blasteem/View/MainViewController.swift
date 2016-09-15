@@ -44,20 +44,57 @@ class MainViewController: UIViewController {
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        
-    }
-    
-    deinit{
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
+    
     override func viewWillAppear(animated: Bool) {
         NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(MainViewController.slideMenuSelected(_:)), name: "SlideMenuNotification", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(MainViewController.loadNotifications), name: "RemoteNotification", object: nil)
         
     }
     
+    func receiveRemoteNotification(notification:NSNotification) {
+        
+        self.loadNotifications()
+        
+    }
+    
     func loadNotifications() {
+        if let isforeground = USER_DEFAULTS.objectForKey("isforeground") as? String {
+            if isforeground == "no" {
+                USER_DEFAULTS.setObject("yes", forKey: "isforeground")
+                let video_id = USER_DEFAULTS.objectForKey("video_id") as? String
+                if video_id != nil {
+                    let video = VideoModel()
+                    video.blast_id = video_id
+                    self.addNotificationVC()
+                    
+                    //Inform server video is read
+                    let request = RequestBuilder()
+                    
+                    request.url = ApiUrl.GET_NOTIFICATIONS
+                    if let device_token = USER_DEFAULTS.objectForKey("device_token") {
+                        request.addParameterWithKey("token", value: device_token)
+                    }else{
+                        return
+                    }
+                    
+                    request.addParameterWithKey("os", value: "iOS")
+                    request.addParameterWithKey("id", value: Int(video.blast_id!)!)
+                    request.addParameterWithKey("viewed", value: "true")
+                    ComManager().postRequestToServer(request, successHandler: { (responseBuilder) in
+                        
+                    }) { (error) in
+                        
+                    }
+                    ViewManager.sharedInstance.showVideoPage(video, homeVC: nil, creatorVC: nil)
+                    
+                }
+            }
+        }
+        
         let request = RequestBuilder()
+        
         request.url = ApiUrl.GET_NOTIFICATIONS
         if let device_token = USER_DEFAULTS.objectForKey("device_token") {
             request.addParameterWithKey("token", value: device_token)
@@ -119,7 +156,7 @@ class MainViewController: UIViewController {
         self.removeViewControllerAsChildViewController()
         let mainStroyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
         let viewController = mainStroyboard.instantiateViewControllerWithIdentifier("NotificationTableViewController") as? NotificationTableViewController
-        
+        viewController?.mainVC  = self
         self.addViewControllerasChild(viewController!)
     }
     
@@ -191,7 +228,7 @@ class MainViewController: UIViewController {
             addCreatorListVC()
         }
         if menu == SlideMenu.Meet {
-            addMeetsAndNews(ApiUrl.GET_NEWS_LIST)
+            addMeetsAndNews(ApiUrl.GET_MEETS_LIST)
         }
         if menu == SlideMenu.News {
             addMeetsAndNews(ApiUrl.GET_NEWS_LIST)

@@ -18,17 +18,17 @@ let Current_User = "currentUser"
 let Current_User_ID = "currentUserId"
 struct AppCredential {
     static let API_UNAME = "apiuser"
-    static let API_PWD = "SJmPgYR!2LFkrB%dx65cYT8C"
+    static let API_PWD = "NcQDu)!vXzZ8(%RWxv8fr%v&"
     
-    static let CLIENT_ID = "5CXEOvasCDNRyeDHJmfmw3Y4YXGad4"
-    static let CLIENT_SECRET = "7iG4WvA7XcLL3jZG1J3h5zk4Ej1ktf"
+    static let CLIENT_ID = "uzwqqW6Gdmx1jYggXK8OJ9kzvWc4J1"
+    static let CLIENT_SECRET = "MeAjF1fLHt7furdLHbwQZgZjPvg1A0"
     static let NOTIFICATION_TOKEN = "APA91bG-399h-qD_OFTwxjbzWaKYeWMSTjNrH_qnjxGZqpaPbJpFB8sKV27BsSSza6KoIUm3JDERMSmrmcK73sCmJ5XvenVxczQrV72AtMORE8WMtLbTUHY"
     
 }
 
 struct ApiUrl {
     
-    static let BASEURL = "https://blasteem.stringsoftware.space/"
+    static let BASEURL = "https://www.blasteem.com/"
     static let NEWS = "news/"
     static let MEET = "meet/"
     static let FACTORY = "e-la-factory/"
@@ -64,6 +64,7 @@ struct ApiUrl {
     static let ADD_COMMENTS = "wp-json/wp/v2/videos/add_comment"
     
     static let BLAST_VIDEO = "wp-json/wp/v2/videos/blast-it"
+    static let LIKE_VIDEO = "wp-json/wp/v2/videos/like-it"
     static let GET_NOTIFICATIONS = "pnfw/posts/"
     static let GET_TERMS = "wp-json/wp/v2/users/get_terms_and_conditions"
     

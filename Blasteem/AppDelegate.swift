@@ -61,8 +61,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate,DSRestClientDelegate {
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
-
+        
+        if !USER_DEFAULTS.boolForKey(IS_LOGIN) {
+            USER_DEFAULTS.setObject(nil, forKey: "isforeground")
+            USER_DEFAULTS.setObject(nil, forKey: "video_id")
+            return
+        }
+      
+        if application.applicationState == UIApplicationState.Active
+        {
+            
+            USER_DEFAULTS.setObject("yes", forKey: "isforeground")
+            
+            
+        }else{
+            USER_DEFAULTS.setObject("no", forKey: "isforeground")
+            USER_DEFAULTS.setObject(userInfo["id"] as! String, forKey: "video_id")
+        }
+        
         NSNotificationCenter.defaultCenter().postNotificationName("RemoteNotification", object: nil)
+        
     }
 
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {

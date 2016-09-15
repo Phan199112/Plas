@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UpdateProfileHomeViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSource,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
+class UpdateProfileHomeViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSource,UIImagePickerControllerDelegate,UINavigationControllerDelegate,RSKImageCropViewControllerDelegate{
     var currentUser:UserModel?
     var pickerType:String = "birthday"
     @IBOutlet weak var overlayView: UIView!
@@ -41,8 +41,14 @@ class UpdateProfileHomeViewController: UIViewController,UIPickerViewDelegate,UIP
         
         self.birthdayPickerView.subviews[0].subviews[1].backgroundColor = UIColor.whiteColor()
         self.birthdayPickerView.subviews[0].subviews[2].backgroundColor = UIColor.whiteColor()
+        self.birthdayPickerView.maximumDate = NSDate()
         
         Utils.makeCircleFromRetacgleView(self.selectButton, radius: 3)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.hidden = true
     }
     
     func showPickerView() {
@@ -186,7 +192,7 @@ class UpdateProfileHomeViewController: UIViewController,UIPickerViewDelegate,UIP
             self.overlayView.hidden = true
             let imagePicker = UIImagePickerController()
             imagePicker.sourceType = .Camera
-            imagePicker.allowsEditing = true
+            
             imagePicker.delegate = self
             self.presentViewController(imagePicker, animated: true, completion: nil)
         }
@@ -201,7 +207,7 @@ class UpdateProfileHomeViewController: UIViewController,UIPickerViewDelegate,UIP
             self.overlayView.hidden = true
             let imagePicker = UIImagePickerController()
             imagePicker.sourceType = .PhotoLibrary
-            imagePicker.allowsEditing = true
+            
             imagePicker.delegate = self
             self.presentViewController(imagePicker, animated: true, completion: nil)
         }
@@ -224,14 +230,24 @@ class UpdateProfileHomeViewController: UIViewController,UIPickerViewDelegate,UIP
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         
-        containerVC!.currentUser?.avatar_data = UIImageJPEGRepresentation(info[UIImagePickerControllerEditedImage] as! UIImage, 0.5)
-        containerVC!.avatarImageView.image = info[UIImagePickerControllerEditedImage] as? UIImage
         picker.dismissViewControllerAnimated(true) {
-            
+            var imageCropVC : RSKImageCropViewController!
+            imageCropVC = RSKImageCropViewController(image: info[UIImagePickerControllerOriginalImage] as! UIImage, cropMode: .Circle)
+            imageCropVC.delegate = self
+            self.navigationController?.pushViewController(imageCropVC, animated: true)
         }
         
     }
+    func imageCropViewControllerDidCancelCrop(controller: RSKImageCropViewController) {
+        self.navigationController?.popViewControllerAnimated(true)
+    }
     
+    func imageCropViewController(controller: RSKImageCropViewController, didCropImage croppedImage: UIImage, usingCropRect cropRect: CGRect) {
+        self.navigationController?.popViewControllerAnimated(true)
+        containerVC!.currentUser?.avatar_data = UIImageJPEGRepresentation(croppedImage, 0.5)
+        containerVC!.avatarImageView.image = croppedImage
+        
+    }
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         picker.dismissViewControllerAnimated(true) {
             

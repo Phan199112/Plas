@@ -14,7 +14,8 @@ class NotificationTableViewCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var avatarimageView: UIImageView!
     
-    var homeVC:NotificationTableViewController?
+    @IBOutlet weak var newbadgeLabel: UILabel!
+    weak var homeVC:NotificationTableViewController?
     var notification:VideoModel?{
         didSet{
             self.configureView()
@@ -26,14 +27,19 @@ class NotificationTableViewCell: UITableViewCell {
     }
 
     func configureView() {
-        self.titleLabel.text = notification?.post_title
-        self.nameLabel.text = notification?.creator?.name
+        self.titleLabel.text = notification?.post_title?.uppercaseString
+        self.nameLabel.text = notification?.creator?.name?.uppercaseString
         Utils.makeCircleFromRetacgleView(self.avatarimageView, radius: 20)
         if let profile_image = notification?.creator?.profile_image
         {
             self.avatarimageView.sd_setImageWithURL(NSURL(string: profile_image))
         }else{
             self.avatarimageView.image = UIImage(named: "default")
+        }
+        if (notification?.is_read)! {
+            self.newbadgeLabel.hidden = true
+        }else{
+            self.newbadgeLabel.hidden = false
         }
         
     }
