@@ -29,6 +29,7 @@ struct AppCredential {
 struct ApiUrl {
     
     static let BASEURL = "https://www.blasteem.com/"
+    
     static let NEWS = "news/"
     static let MEET = "meet/"
     static let FACTORY = "e-la-factory/"
