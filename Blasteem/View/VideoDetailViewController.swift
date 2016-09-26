@@ -7,9 +7,13 @@
 //
 
 import UIKit
+import GoogleInteractiveMediaAds
 
-class VideoDetailViewController: UIViewController,BCOVPlaybackControllerDelegate,BCOVPUIPlayerViewDelegate ,UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate,UITextFieldDelegate{
+class VideoDetailViewController: UIViewController,BCOVPlaybackControllerDelegate,BCOVPUIPlayerViewDelegate ,UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate,UITextFieldDelegate,IMAWebOpenerDelegate{
     
+    let kViewControllerIMAPublisherID = "insertyourpidhere"
+    let kViewControllerIMALanguage = "en"
+    let kViewControllerIMAVMAPResponseAdTag = "http://video.bal.ad.dotandad.com/mediamond.jsp?mpo=blasteemr_vast2&mpt=bla_bst_vid_all_vp_0_1&purl={window.location.href}&rnd={timestamp}"
     let kViewControllerCatalogToken = "BCpkADawqM21RvYi3po8jqdoGOu_O_1h-wNDXpXzMWsup6VzgmlgEsBYJLrKwo2SgWKz2Na-wLoue64WnbfrkXv_t2h8Q0c6zB1G-O9T3lf7XaJEwJ9FLqDJ_rBt0jXRiPkInor7sIHFCkEc"
     let playlistID = "4593825305001"
     var playbackController:BCOVPlaybackController?
@@ -38,7 +42,7 @@ class VideoDetailViewController: UIViewController,BCOVPlaybackControllerDelegate
     @IBOutlet weak var playpauseButton: UIButton!
     
     var currentPlayer:AVPlayer?
-    
+    var isAdPlay:Bool = true
     var playerView:BCOVPUIPlayerView?
     
     var homeVC:HomeViewController?
@@ -136,6 +140,7 @@ class VideoDetailViewController: UIViewController,BCOVPlaybackControllerDelegate
     }
     
     func loadVideoInfo(video_id:String) {
+        
         let request = RequestBuilder()
         request.url = ApiUrl.GET_SINGLE_VIDEO_INFO
         
@@ -488,6 +493,9 @@ class VideoDetailViewController: UIViewController,BCOVPlaybackControllerDelegate
     
     @IBAction func tapVideo(sender: AnyObject) {
         self.view.endEditing(true)
+        if isAdPlay {
+            return
+        }
         if isPlay {
             self.playpauseButton.hidden = false
             self.fullScreenButton.hidden = false
@@ -533,7 +541,19 @@ class VideoDetailViewController: UIViewController,BCOVPlaybackControllerDelegate
     
     func setupVieoView() {
         let manager = BCOVPlayerSDKManager.sharedManager()
-        playbackController =  manager.createPlaybackController()
+        
+        let imaSettings = IMASettings()
+        imaSettings.ppid = kViewControllerCatalogToken
+        imaSettings.language = kViewControllerIMALanguage
+        
+        let renderSettings = IMAAdsRenderingSettings()
+        renderSettings.webOpenerPresentingController = self
+        renderSettings.webOpenerDelegate = self
+        
+        let adsRequestPolicy = BCOVIMAAdsRequestPolicy.videoPropertiesVMAPAdTagUrlAdsRequestPolicy()
+        
+        
+        playbackController =  manager.createIMAPlaybackControllerWithSettings(imaSettings, adsRenderingSettings: renderSettings, adsRequestPolicy: adsRequestPolicy, adContainer: self.videoView, companionSlots: nil, viewStrategy: nil)
         playbackController?.delegate = self
         playbackController?.autoAdvance = true
         
@@ -556,19 +576,31 @@ class VideoDetailViewController: UIViewController,BCOVPlaybackControllerDelegate
         service?.findVideoWithVideoID(video?.video_id, parameters: nil, completion: { (video, jsonResponse, error) in
             if video != nil
             {
-                dispatch_async(dispatch_get_main_queue(),{
-                    self.playerView!.playbackController?.setVideos([video])
-                    //            self.playbackController?.play()
-                    self.isPlay = true
+                let updateVideo = self.updateVideoWithVMATag(video)
                     
-                })
+                
+                self.playerView!.playbackController?.setVideos([updateVideo])
+                    //            self.playbackController?.play()
+                    
                 
             }
         })
     }
 
-    
+    func updateVideoWithVMATag(video:BCOVVideo) -> BCOVVideo
+    {
+        return video.update({ (mutableVideo) in
+            let adProperties = [kBCOVIMAAdTag:self.kViewControllerIMAVMAPResponseAdTag]
+            var propertiesToUpdate = mutableVideo.properties
+            propertiesToUpdate.merge(adProperties)
+            mutableVideo.properties = propertiesToUpdate
+            
+        })
+    }
     @IBAction func onPlayPause(sender: AnyObject) {
+        if isAdPlay {
+            return
+        }
         timer?.invalidate()
         AppUtil.dismissLoadingHud(self.videoView)
         if isPlay {
@@ -792,14 +824,46 @@ class VideoDetailViewController: UIViewController,BCOVPlaybackControllerDelegate
         }
     }
    
+    func playbackController(controller: BCOVPlaybackController!, playbackSession session: BCOVPlaybackSession!, didReceiveLifecycleEvent lifecycleEvent: BCOVPlaybackSessionLifecycleEvent!) {
+        let type = lifecycleEvent.eventType
+        if type == kBCOVIMALifecycleEventAdsLoaderLoaded {
+            
+            print("Loaded")
+            self.isPlay = true
+        }else if type == kBCOVIMALifecycleEventAdsManagerDidReceiveAdEvent
+        {
+            let adEvent = lifecycleEvent.properties["adEvent"] as! IMAAdEvent
+            switch adEvent.type {
+            case IMAAdEventType.STARTED:
+                print("Started")
+                break
+            case .COMPLETE:
+                print("Completed")
+                break
+                
+            case .ALL_ADS_COMPLETED:
+                print("All Completed")
+                isAdPlay = false
+                break
+            default:
+                break
+            }
+        }else{
+            print("Failed")
+        }
+    }
     //PlaybackController Delegates
     func playbackController(controller: BCOVPlaybackController!, playbackSession session: BCOVPlaybackSession!, didProgressTo progress: NSTimeInterval) {
         
         let duration = CMTimeGetSeconds((session.player.currentItem?.duration)!) as NSTimeInterval
         var percent:Float = 0
         if !isnan(duration) {
-            AppUtil.dismissLoadingHud(self.videoView)
-            self.sliderBar.userInteractionEnabled = true
+            var token: dispatch_once_t = 0
+            dispatch_once(&token) {
+                AppUtil.dismissLoadingHud(self.videoView)
+                self.sliderBar.userInteractionEnabled = true
+                
+            }
             percent = Float(progress / duration)
         }
         self.sliderBar.value = percent
@@ -830,4 +894,12 @@ class VideoDetailViewController: UIViewController,BCOVPlaybackControllerDelegate
     }
     */
 
+}
+
+extension Dictionary {
+    mutating func merge<K, V>(dict: [K: V]){
+        for (k, v) in dict {
+            self.updateValue(v as! Value, forKey: k as! Key)
+        }
+    }
 }

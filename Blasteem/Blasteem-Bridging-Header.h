@@ -26,5 +26,8 @@
 #import "UIScrollView+IBFloatingHeader.h"
 #import <PushNotifications/PushNotifications.h>
 #import <RSKImageCropper/RSKImageCropper.h>
+#import <BrightcoveIMA/BrightcoveIMA.h>
+@class IMASettings;
+
 
 #endif /* Blasteem_Bridging_Header_h */

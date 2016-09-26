@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'EEA7F7E8AB3704AB6495C209'
+               BlueprintIdentifier = '1F8F24603DD082C283779052'
                BlueprintName = 'Brightcove-Player-SDK-BCOVPUIResources'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'BCOVPUIResources.bundle'>

@@ -33,6 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,DSRestClientDelegate {
             forTypes: [.Badge, .Sound, .Alert], categories: nil)
         application.registerUserNotificationSettings(notificationSettings)
         UIApplication.sharedApplication().registerForRemoteNotifications()
+        
         return true
     }
     

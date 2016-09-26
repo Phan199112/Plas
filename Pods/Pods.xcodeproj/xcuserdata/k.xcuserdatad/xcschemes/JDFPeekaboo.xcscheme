@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'DA2B356C9D4C65482497A6EC'
+               BlueprintIdentifier = 'B006E20B77F81B29A8C1C9B2'
                BlueprintName = 'JDFPeekaboo'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'JDFPeekaboo.framework'>
