@@ -21,7 +21,6 @@ class NotificationTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         self.tableView.registerNib(UINib(nibName: "NotificationTableViewCell",bundle: nil), forCellReuseIdentifier: "notificationCell")
         
-        self.loadData()
     }
     
     override func viewWillAppear(animated: Bool) {

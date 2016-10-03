@@ -11,8 +11,9 @@ import GoogleInteractiveMediaAds
 
 class VideoDetailViewController: UIViewController,BCOVPlaybackControllerDelegate,BCOVPUIPlayerViewDelegate ,UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate,UITextFieldDelegate,IMAWebOpenerDelegate{
     
+    @IBOutlet weak var videoButton: UIButton!
     let kViewControllerIMAPublisherID = "insertyourpidhere"
-    let kViewControllerIMALanguage = "en"
+    let kViewControllerIMALanguage = "it"
     let kViewControllerIMAVMAPResponseAdTag = "http://video.bal.ad.dotandad.com/mediamond.jsp?mpo=blasteemr_vast2&mpt=bla_bst_vid_all_vp_0_1&purl={window.location.href}&rnd={timestamp}"
     let kViewControllerCatalogToken = "BCpkADawqM21RvYi3po8jqdoGOu_O_1h-wNDXpXzMWsup6VzgmlgEsBYJLrKwo2SgWKz2Na-wLoue64WnbfrkXv_t2h8Q0c6zB1G-O9T3lf7XaJEwJ9FLqDJ_rBt0jXRiPkInor7sIHFCkEc"
     let playlistID = "4593825305001"
@@ -64,7 +65,7 @@ class VideoDetailViewController: UIViewController,BCOVPlaybackControllerDelegate
     var commentHeaderView = NSBundle.mainBundle().loadNibNamed("CommentHeaderView", owner: nil, options: nil)[0] as? CommentHeaderView
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.videoButton.userInteractionEnabled = false
         self.navigationController!.interactivePopGestureRecognizer!.enabled = false
         self.commentHeaderView?.commentButton.addTarget(self, action: #selector(VideoDetailViewController.addComment), forControlEvents: .TouchUpInside)
         // Do any additional setup after loading the view.
@@ -84,6 +85,7 @@ class VideoDetailViewController: UIViewController,BCOVPlaybackControllerDelegate
         
         self.loadAllData()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ForgotPasswordViewController.keyboardWillShow(_:)), name:UIKeyboardWillShowNotification, object: nil);
+        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ForgotPasswordViewController.keyboardWillHide(_:)), name:UIKeyboardWillHideNotification, object: nil);
         
         self.sliderBar.tintColor = mainColor
@@ -252,10 +254,8 @@ class VideoDetailViewController: UIViewController,BCOVPlaybackControllerDelegate
             AppUtil.disappearLoadingHud()
             if responseBuilder.isSuccessful!
             {
-                
                 self.video?.is_following_creator = !(self.video?.is_following_creator)!
                 self.showIsFavorite()
-                
                 
             }else{
                 AppUtil.showErrorMessage(responseBuilder.reason!)
@@ -268,7 +268,11 @@ class VideoDetailViewController: UIViewController,BCOVPlaybackControllerDelegate
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
+        
+        self.playbackController!.setVideos(nil)
+        self.playbackController!.pause()
         self.playerView = nil
+        
         AppUtil.disappearLoadingHud()
     }
     
@@ -277,10 +281,10 @@ class VideoDetailViewController: UIViewController,BCOVPlaybackControllerDelegate
         if (video?.is_following_creator)! {
             self.favoriteImageView.image = UIImage(named: "check")
         }else{
-            
             self.favoriteImageView.image = UIImage(named: "home_ic_plus_button")
         }
     }
+    
     func configureView()
     {
         //Headerview of Table
@@ -304,7 +308,7 @@ class VideoDetailViewController: UIViewController,BCOVPlaybackControllerDelegate
     
     func showVideoDetail()  {
         let videoDetailview = NSBundle.mainBundle().loadNibNamed("VideoDetailHeaderView", owner: nil, options: nil)[0] as? VideoDetailHeaderView
-        videoDetailview?.heightConstraints.constant = Utils.getHeightOfString(self.video?.post_content!, width: ScreenSize.SCREEN_WIDTH - 16, andFont: AppFont.OpenSans_15)
+        videoDetailview?.heightConstraints.constant = Utils.getHeightOfString(self.video?.post_content!, width: ScreenSize.SCREEN_WIDTH - 16, andFont: AppFont.OpenSans_15) + 10
         if let count = video?.blast_count {
             videoDetailview?.blast_countLabel.text = AppUtil.getStringFromInt(count)
         }
@@ -327,7 +331,7 @@ class VideoDetailViewController: UIViewController,BCOVPlaybackControllerDelegate
             
         }
         videoDetailview?.postContentTextView.text = video?.post_content
-        videoDetailview?.frame = CGRectMake(0, 0, ScreenSize.SCREEN_WIDTH, 145 + Utils.getHeightOfString(self.video?.post_content!, width: ScreenSize.SCREEN_WIDTH - 16, andFont: AppFont.OpenSans_15))
+        videoDetailview?.frame = CGRectMake(0, 0, ScreenSize.SCREEN_WIDTH, 155 + Utils.getHeightOfString(self.video?.post_content!, width: ScreenSize.SCREEN_WIDTH - 16, andFont: AppFont.OpenSans_15))
         videoDetailview?.blastButton.addTarget(self, action: #selector(VideoDetailViewController.onBlast(_:)), forControlEvents: .TouchUpInside)
         if (video?.is_blasted)! {
             videoDetailview?.blastButton.setBackgroundImage(UIImage(named: "unblast"), forState: .Normal)
@@ -547,13 +551,14 @@ class VideoDetailViewController: UIViewController,BCOVPlaybackControllerDelegate
         imaSettings.language = kViewControllerIMALanguage
         
         let renderSettings = IMAAdsRenderingSettings()
+        
+        
         renderSettings.webOpenerPresentingController = self
         renderSettings.webOpenerDelegate = self
-        
         let adsRequestPolicy = BCOVIMAAdsRequestPolicy.videoPropertiesVMAPAdTagUrlAdsRequestPolicy()
         
-        
         playbackController =  manager.createIMAPlaybackControllerWithSettings(imaSettings, adsRenderingSettings: renderSettings, adsRequestPolicy: adsRequestPolicy, adContainer: self.videoView, companionSlots: nil, viewStrategy: nil)
+        
         playbackController?.delegate = self
         playbackController?.autoAdvance = true
         
@@ -568,8 +573,8 @@ class VideoDetailViewController: UIViewController,BCOVPlaybackControllerDelegate
         self.videoView.addSubview(playerView!)
         
         playerView!.layer.zPosition = -100
+        self.playerView?.playbackController = self.playbackController
         
-        playerView!.playbackController = playbackController
         service = BCOVPlaybackService(accountId: playlistID, policyKey: kViewControllerCatalogToken)
         AppUtil.showLoadingHudOnView(self.videoView)
         loadingFlag = true
@@ -578,13 +583,21 @@ class VideoDetailViewController: UIViewController,BCOVPlaybackControllerDelegate
             {
                 let updateVideo = self.updateVideoWithVMATag(video)
                     
-                
-                self.playerView!.playbackController?.setVideos([updateVideo])
-                    //            self.playbackController?.play()
-                    
+                if self.playerView != nil
+                {
+                    self.playerView!.playbackController?.setVideos([updateVideo])
+                }
                 
             }
         })
+    }
+    
+    func webOpenerDidOpenInAppBrowser(webOpener: NSObject!) {
+        print("")
+    }
+    
+    func webOpenerWillOpenInAppBrowser(webOpener: NSObject!) {
+        print("")
     }
 
     func updateVideoWithVMATag(video:BCOVVideo) -> BCOVVideo
@@ -825,11 +838,13 @@ class VideoDetailViewController: UIViewController,BCOVPlaybackControllerDelegate
     }
    
     func playbackController(controller: BCOVPlaybackController!, playbackSession session: BCOVPlaybackSession!, didReceiveLifecycleEvent lifecycleEvent: BCOVPlaybackSessionLifecycleEvent!) {
+        self.sliderBar.userInteractionEnabled = false
         let type = lifecycleEvent.eventType
         if type == kBCOVIMALifecycleEventAdsLoaderLoaded {
             
             print("Loaded")
             self.isPlay = true
+            
         }else if type == kBCOVIMALifecycleEventAdsManagerDidReceiveAdEvent
         {
             let adEvent = lifecycleEvent.properties["adEvent"] as! IMAAdEvent
@@ -844,6 +859,8 @@ class VideoDetailViewController: UIViewController,BCOVPlaybackControllerDelegate
             case .ALL_ADS_COMPLETED:
                 print("All Completed")
                 isAdPlay = false
+                self.sliderBar.userInteractionEnabled = true
+                self.videoButton.userInteractionEnabled = true
                 break
             default:
                 break

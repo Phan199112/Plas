@@ -17,7 +17,7 @@ class AppUtil {
         SVProgressHUD.setDefaultStyle(.Custom)
         SVProgressHUD.setBackgroundColor(UIColor(red: 0, green: 0, blue: 0, alpha: 0.6))
         SVProgressHUD.setForegroundColor(mainColor)
-        
+        SVProgressHUD.setDefaultMaskType(.Clear)
         SVProgressHUD.show()
 //        [KVNProgress showWithStatus:@"Loading"
 //        onView:view];

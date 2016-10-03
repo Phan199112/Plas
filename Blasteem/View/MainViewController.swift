@@ -118,7 +118,6 @@ class MainViewController: UIViewController {
             }else{
                 self.badgeLabel.backgroundColor = UIColor.redColor()
                 self.badgeLabel.text = String(responseBuilder.getCountOfUnRead())
-                
             }
             
         }) { (error) in
@@ -403,7 +402,9 @@ class MainViewController: UIViewController {
         let searchVC = self.storyboard?.instantiateViewControllerWithIdentifier("SearchViewController") as? SearchViewController
         self.navigationController?.pushViewController(searchVC!, animated: false)
         
+        
     }
+    
     override func shouldAutorotate() -> Bool {
         return false
     }

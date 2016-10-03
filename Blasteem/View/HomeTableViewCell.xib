@@ -40,7 +40,7 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rN1-YJ-nGL">
-                                        <rect key="frame" x="37" y="0.0" width="232" height="60"/>
+                                        <rect key="frame" x="37" y="0.0" width="221" height="60"/>
                                         <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="16"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -54,14 +54,20 @@
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A0d-vu-cst">
                                         <rect key="frame" x="277" y="14" width="30" height="30"/>
-                                        <connections>
-                                            <action selector="onFollowUser:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="9Qq-Wj-UBt"/>
-                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zNA-aj-OfM">
-                                        <rect key="frame" x="0.0" y="0.0" width="269" height="60"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="258" height="60"/>
                                         <connections>
                                             <action selector="goToCreatorPage:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="2kf-IH-TYB"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QTf-mc-xE0">
+                                        <rect key="frame" x="266" y="0.0" width="54" height="60"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="54" id="nVR-FF-qYT"/>
+                                        </constraints>
+                                        <connections>
+                                            <action selector="onFollowUser:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="OCq-M3-TbL"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -70,7 +76,6 @@
                                     <constraint firstAttribute="bottom" secondItem="zNA-aj-OfM" secondAttribute="bottom" id="5YK-gg-hGO"/>
                                     <constraint firstItem="zNA-aj-OfM" firstAttribute="trailing" secondItem="rN1-YJ-nGL" secondAttribute="trailing" id="7es-Mh-5zJ"/>
                                     <constraint firstItem="rN1-YJ-nGL" firstAttribute="leading" secondItem="1Dj-ea-XDM" secondAttribute="trailing" constant="1" id="8sS-7B-UEv"/>
-                                    <constraint firstItem="A0d-vu-cst" firstAttribute="leading" secondItem="rN1-YJ-nGL" secondAttribute="trailing" constant="8" id="9Y5-1s-7iF"/>
                                     <constraint firstItem="rN1-YJ-nGL" firstAttribute="height" secondItem="Yx9-1E-0X9" secondAttribute="height" id="BmY-ZW-CbE"/>
                                     <constraint firstItem="A0d-vu-cst" firstAttribute="centerX" secondItem="MUR-H4-3EW" secondAttribute="centerX" id="BsX-SJ-ezT"/>
                                     <constraint firstItem="1Dj-ea-XDM" firstAttribute="leading" secondItem="Yx9-1E-0X9" secondAttribute="leading" constant="8" id="G9r-me-ab7"/>
@@ -80,8 +85,12 @@
                                     <constraint firstItem="A0d-vu-cst" firstAttribute="centerY" secondItem="MUR-H4-3EW" secondAttribute="centerY" id="OL5-jB-oL1"/>
                                     <constraint firstAttribute="trailing" secondItem="MUR-H4-3EW" secondAttribute="trailing" constant="15" id="Ued-tE-qww"/>
                                     <constraint firstItem="rN1-YJ-nGL" firstAttribute="centerY" secondItem="1Dj-ea-XDM" secondAttribute="centerY" id="Uwe-Cv-FFx"/>
+                                    <constraint firstItem="QTf-mc-xE0" firstAttribute="leading" secondItem="rN1-YJ-nGL" secondAttribute="trailing" constant="8" id="Vl2-Z6-IHX"/>
+                                    <constraint firstAttribute="trailing" secondItem="QTf-mc-xE0" secondAttribute="trailing" id="YFr-KM-kgF"/>
                                     <constraint firstItem="zNA-aj-OfM" firstAttribute="top" secondItem="Yx9-1E-0X9" secondAttribute="top" id="b7z-FV-lJ3"/>
+                                    <constraint firstAttribute="bottom" secondItem="QTf-mc-xE0" secondAttribute="bottom" id="eqb-kO-4Xf"/>
                                     <constraint firstItem="zNA-aj-OfM" firstAttribute="leading" secondItem="Yx9-1E-0X9" secondAttribute="leading" id="uiV-4T-ewK"/>
+                                    <constraint firstItem="QTf-mc-xE0" firstAttribute="top" secondItem="Yx9-1E-0X9" secondAttribute="top" id="umg-HE-Xrg"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TfJ-g6-7so">
@@ -122,7 +131,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IND-zS-9QO">
                                 <rect key="frame" x="8" y="305" width="9" height="20.5"/>
                                 <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="15"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="likeicon" translatesAutoresizingMaskIntoConstraints="NO" id="L0Z-VY-E5I">
@@ -135,7 +144,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hXp-Ul-0dj">
                                 <rect key="frame" x="53" y="305" width="9" height="20.5"/>
                                 <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="15"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>

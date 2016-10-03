@@ -15,7 +15,7 @@ class NotificationTableViewCell: UITableViewCell {
     @IBOutlet weak var avatarimageView: UIImageView!
     
     @IBOutlet weak var newbadgeLabel: UILabel!
-    weak var homeVC:NotificationTableViewController?
+    
     var notification:VideoModel?{
         didSet{
             self.configureView()

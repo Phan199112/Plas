@@ -2095,6 +2095,7 @@
                         <outlet property="sliderBar" destination="Odd-mn-kma" id="Dyg-NQ-v89"/>
                         <outlet property="tableView" destination="d2z-R7-z4z" id="j3G-K8-JYj"/>
                         <outlet property="topConstraint" destination="msS-gh-CYK" id="vhA-C4-HEy"/>
+                        <outlet property="videoButton" destination="JU0-0e-gG1" id="uQP-Vv-SD5"/>
                         <outlet property="videoConstraints" destination="Zi7-48-zji" id="EBg-nj-u4e"/>
                         <outlet property="videoView" destination="YuI-OF-1Ia" id="P9s-5m-3Ip"/>
                     </connections>
@@ -2107,7 +2108,7 @@
         <scene sceneID="Fn2-wo-dVQ">
             <objects>
                 <tableViewController storyboardIdentifier="NotificationTableViewController" id="cnB-s3-cLf" customClass="NotificationTableViewController" customModule="Blasteem" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="nyK-Z3-0Bw">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="nyK-Z3-0Bw">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

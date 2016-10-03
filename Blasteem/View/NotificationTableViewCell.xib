@@ -27,7 +27,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="beb-qe-mh4">
-                        <rect key="frame" x="0.0" y="0.0" width="300" height="82.5"/>
+                        <rect key="frame" x="0.0" y="0.5" width="320" height="82.5"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="t33-VC-xqh">
@@ -54,8 +54,8 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="NEW" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qnd-72-ijC">
-                        <rect key="frame" x="248" y="29" width="35.5" height="23.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NEW" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qnd-72-ijC">
+                        <rect key="frame" x="248" y="30.5" width="35.5" height="23.5"/>
                         <fontDescription key="fontDescription" name="OpenSans-Italic" family="Open Sans" pointSize="17"/>
                         <color key="textColor" red="0.047058823530000002" green="0.94117647059999998" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -72,13 +72,13 @@
                     <constraint firstItem="SAN-si-UOe" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="0BE-Ek-qzU"/>
                     <constraint firstItem="SAN-si-UOe" firstAttribute="leading" secondItem="t33-VC-xqh" secondAttribute="trailing" constant="8" id="8Hw-Zg-N3v"/>
                     <constraint firstAttribute="bottomMargin" secondItem="beb-qe-mh4" secondAttribute="bottom" constant="-7" id="ANB-5t-CMg"/>
-                    <constraint firstItem="9jA-YP-LlS" firstAttribute="leading" secondItem="beb-qe-mh4" secondAttribute="trailing" constant="-8" id="B0P-wA-s3s"/>
                     <constraint firstItem="9jA-YP-LlS" firstAttribute="leading" secondItem="rNR-ac-Y0M" secondAttribute="trailing" constant="8" id="G74-6d-ePl"/>
                     <constraint firstItem="t33-VC-xqh" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="HND-Ra-Cyk"/>
                     <constraint firstItem="9jA-YP-LlS" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="MSw-6o-tT2"/>
                     <constraint firstItem="rNR-ac-Y0M" firstAttribute="leading" secondItem="t33-VC-xqh" secondAttribute="trailing" constant="8" id="MwD-wd-WK2"/>
                     <constraint firstItem="qnd-72-ijC" firstAttribute="centerY" secondItem="9jA-YP-LlS" secondAttribute="centerY" id="OkF-Ud-ApQ"/>
                     <constraint firstItem="beb-qe-mh4" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-8" id="Rbu-zX-GfB"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="beb-qe-mh4" secondAttribute="trailing" constant="-8" id="UEc-wM-PEM"/>
                     <constraint firstItem="t33-VC-xqh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="XkJ-nN-erH"/>
                     <constraint firstItem="9jA-YP-LlS" firstAttribute="leading" secondItem="qnd-72-ijC" secondAttribute="trailing" constant="8" id="bRV-fR-1Vx"/>
                     <constraint firstItem="9jA-YP-LlS" firstAttribute="leading" secondItem="SAN-si-UOe" secondAttribute="trailing" constant="8" id="cPt-QP-dSX"/>

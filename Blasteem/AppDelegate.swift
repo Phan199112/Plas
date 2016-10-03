@@ -33,6 +33,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate,DSRestClientDelegate {
             forTypes: [.Badge, .Sound, .Alert], categories: nil)
         application.registerUserNotificationSettings(notificationSettings)
         UIApplication.sharedApplication().registerForRemoteNotifications()
+        if launchOptions != nil{
+            let remoteNotif = launchOptions![UIApplicationLaunchOptionsRemoteNotificationKey] as? [String:AnyObject]
+            if remoteNotif != nil {
+                if !USER_DEFAULTS.boolForKey(IS_LOGIN) {
+                    USER_DEFAULTS.setObject(nil, forKey: "isforeground")
+                    USER_DEFAULTS.setObject(nil, forKey: "video_id")
+                    
+                }else{
+                    USER_DEFAULTS.setObject("no", forKey: "isforeground")
+                    USER_DEFAULTS.setObject(remoteNotif!["id"] as! String, forKey: "video_id")
+                    print("remotenotificationvideoid________" + String(remoteNotif!["id"]))
+                }
+            }
+        }
         
         return true
     }
@@ -71,9 +85,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,DSRestClientDelegate {
       
         if application.applicationState == UIApplicationState.Active
         {
-            
             USER_DEFAULTS.setObject("yes", forKey: "isforeground")
-            
             
         }else{
             USER_DEFAULTS.setObject("no", forKey: "isforeground")
